@@ -1,0 +1,96 @@
+/* Généralités */
+a {
+	color: #607185;
+}
+/* header */
+
+.navbar-light .navbar-brand {
+	color: rgba(0,0,0,.9);
+    font-weight: bold;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #607185;
+    font-weight: bold;
+}
+
+
+
+/* index */
+.top {
+	position: relative;
+    width: 100%;
+    padding: 15rem 0;
+    background-image: url(../images/bannerImg10.jpg);
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+#services {
+	background-color: #F7F7F7;
+	margin: 2em 0 ;
+	padding: 1em 0;
+}
+
+/* biographie */
+
+#jean {
+	margin-bottom: 1.5em;
+}
+
+/* Liste des Chapitres*/
+
+.portfolio .portfolio-item {
+  cursor: pointer;
+  position: relative;
+  display: block;
+  max-width: 25rem;
+  margin-bottom: 30px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.portfolio .portfolio-item .portfolio-item-caption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	opacity: 0;
+	background-color: rgba(90, 123, 162, 0.7);
+}
+
+.portfolio .portfolio-item .portfolio-item-caption:hover {
+  opacity: 1;
+}
+
+
+
+
+
+/* Media queries*/
+
+@media screen and (max-width: 1024px) {
+	h1 {
+		font-size: 2.5rem;
+	}
+}
+@media screen and (max-width: 768px) {
+	.top h1 {
+		font-size: 2rem;
+	}
+	.txtbio {
+		max-width: 100%;
+		margin-right: 1.5em;
+	}
+}
+@media screen and (max-width: 481px) {
+	.top h1 {
+		font-size: 1.5rem;
+	}
+
+	#email {
+	margin-top: 1.5em;
+}
+}
