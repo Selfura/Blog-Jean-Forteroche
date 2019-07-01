@@ -10,10 +10,35 @@ a {
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: #607185;
+    color: #000;
     font-weight: bold;
 }
 
+.nav-link:hover {
+    color: black;
+}
+
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 10000;
+    transition: all 0.2s ease-in-out;
+    height: auto;
+    background-color:transparent;  
+    
+    text-align: center;
+}
+
+.header.active {
+    background: #fff;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
 
 
 /* index */
@@ -31,6 +56,13 @@ a {
 	background-color: #F7F7F7;
 	margin: 2em 0 ;
 	padding: 1em 0;
+}
+
+.imgindex {
+    width: 50%;
+    opacity: 0.8;
+    margin-bottom: 1em;
+    border-radius: 0.5rem;
 }
 
 /* biographie */
@@ -65,8 +97,31 @@ a {
   opacity: 1;
 }
 
+.imgchap {
+    width: 33%;
+    opacity: 0.8;
+    margin-bottom: 1em;
+    border-radius: 0.5rem;
+}
 
+/* Chapitre */
 
+.chapitre {
+  margin-top: 5em;
+}
+
+.imgpost {
+    width: 80%;
+    opacity: 0.8;
+    margin-bottom: 1em;
+    border-radius: 0.5rem;
+}
+
+.commentitle {
+  display: flex;
+  justify-content: space-around;
+
+}
 
 
 /* Media queries*/

@@ -11,6 +11,7 @@
 						<hr class="divider my-4">
 						<p class="text-black-50 mb-4">Je n'en croyais pas mes yeux ! A une trentaine de mètres de moi se tenait un animal massif, dont la vue
 						pouvait amener de l'effroi dans la plupart des personnes. Je n'étais pas de ces personnes...</p>
+						<p class="text-black-50">16/06/2019</p>
 						<a class="btn btn-light btn-xl js-scroll-trigger" href="">Lire la suite</a>
 					</div>
 				</div>

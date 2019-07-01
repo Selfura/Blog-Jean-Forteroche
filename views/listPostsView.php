@@ -12,96 +12,44 @@
 		</section>
 		<br>
 	 <!-- Portfolio Section -->
+<?php
+// Connexion à la base de données
+try
+{
+	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+}
+catch(Exception $e)
+{
+        die('Erreur : '.$e->getMessage());
+}
+// On récupère les 5 derniers billets
+$req = $bdd->query('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`, "Publié le %d/%m/%Y") AS `date_creation_fr`, `picture_url` FROM `posts` ORDER BY `id` DESC ');
+
+
+while ($donnees = $req->fetch())
+{
+?>
+
+	 <!-- Portfolio Section -->
 	<section class="page-section portfolio" id="chapter">
 		<div class="container">
 
 			<!-- Portfolio Grid Items -->
 			<div class="row">
-
-				<!-- Portfolio Item 1 -->
-				<div class="col-md-6 col-lg-4">
-					<div class="portfolio-item mx-auto">
-						<div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-							<div class="portfolio-item-caption-content text-center text-white">
-								<p><span class="txtbold">Titre du Chapitre</span><br /> Extrait du chapitre</p>
-							</div>
-						</div>
-						<a href="index.php?action=post">
-						<img class="img-fluid" src="public/images/Alaska3.jpg" alt="">
+				<div class="row justify-content-center">
+					<div class="col-lg-10 text-center">
+						<h2 class="text-center mt-0"><?= htmlspecialchars($donnees['id']); ?>. <?= htmlspecialchars($donnees['title']); ?></h2>
+						<hr class="divider my-4">		
+						<a href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">
+						<img class="img-fluid img-responsive text-center imgchap" src="<?= $donnees['picture_url']; ?>" alt="">
 						</a>
+						<p class="text-black-50 mb-4"><?= substr(htmlspecialchars($donnees['content']), 0, 200).'...'; ?></p>
+						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
+						<a class="btn btn-light btn-xl js-scroll-trigger" href="">Lire la suite</a>
+						<br>
+						<br>
 					</div>
 				</div>
-
-				<!-- Portfolio Item 2 -->
-				<div class="col-md-6 col-lg-4">
-					<div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-						<div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-							<div class="portfolio-item-caption-content text-center text-white">
-								<p><span class="txtbold">Titre du Chapitre</span><br /> Extrait du chapitre</p>
-							</div>
-						</div>
-						<a href="index.php?action=post">
-						<img class="img-fluid" src="public/images/Alaska4.jpg" alt="">
-						</a>
-					</div>
-				</div>
-
-				<!-- Portfolio Item 3 -->
-				<div class="col-md-6 col-lg-4">
-					<div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
-						<div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-							<div class="portfolio-item-caption-content text-center text-white">
-								<p><span class="txtbold">Titre du Chapitre</span><br /> Extrait du chapitre</p>
-							</div>
-						</div>
-						<a href="index.php?action=post">
-						<img class="img-fluid" src="public/images/Alaska6.jpg" alt="">
-						</a>
-					</div>
-				</div>
-
-				<!-- Portfolio Item 4 -->
-				<div class="col-md-6 col-lg-4">
-					<a href="index.php?action=post"><div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
-						<div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-							<div class="portfolio-item-caption-content text-white">
-								<h3 class="text-center">Titre du Chapitre</h3> <p>Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit.</p>
-							</div>
-						</div>
-						<a href="index.php?action=post">
-						<img class="img-fluid" src="public/images/Alaska5.jpg" alt="">
-					</div>
-					</a>
-				</div>
-
-				<!-- Portfolio Item 5 -->
-				<div class="col-md-6 col-lg-4">
-					<div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
-						<div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-							<div class="portfolio-item-caption-content text-center text-white">
-								<p><span class="txtbold">Titre du Chapitre</span><br /> Extrait du chapitre</p>
-							</div>
-						</div>
-						<a href="index.php?action=post">
-						<img class="img-fluid" src="public/images/Alaska7.jpg" alt="">
-						</a>
-					</div>
-				</div>
-
-				<!-- Portfolio Item 6 -->
-				<div class="col-md-6 col-lg-4">
-					<div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
-						<div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-							<div class="portfolio-item-caption-content text-center text-white">
-								<p><span class="txtbold">Titre du Chapitre</span><br /> Extrait du chapitre</p>
-							</div>
-						</div>
-						<a href="index.php?action=post">
-						<img class="img-fluid" src="public/images/Alaska2.jpg" alt="">
-						</a>
-					</div>
-				</div>
-
 			</div>
 	      <!-- /.row -->
 
@@ -109,6 +57,11 @@
 	</section>
 	<br>
 	<br>
+
+<?php
+} // Fin de la boucle des billets
+$req->closeCursor();
+?>
 
 <?php $content = ob_get_clean(); ?>
 

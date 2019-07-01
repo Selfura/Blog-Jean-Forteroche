@@ -1,40 +1,141 @@
-<?php $title = "Variable titre du chapitre"; ?>
+<?php $title = "Titre Chapitre" ?>
 
 <?php ob_start(); ?>
 
+
+<?php
+// Connexion à la base de données
+try
+{
+	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+}
+catch(Exception $e)
+{
+        die('Erreur : '.$e->getMessage());
+}
+// On récupère les 5 derniers billets
+$req = $bdd->prepare('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`, "Publié le %d/%m/%Y") AS `date_creation_fr`, `picture_url` FROM `posts` WHERE `id`= ? ');
+$req->execute(array($_GET['id']));
+
+
+while ($donnees = $req->fetch())
+{
+?>
+
+
+
 <!-- deuxième Section : ? -->
-		<section class="page-section bg-primary">
+		<section class="page-section bg-primary chapitre">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-12 text-center">
-						<h2 class="text-center mt-0">Titre du chapitre</h2>
+						<h2 class="text-center mt-0"><?= htmlspecialchars($donnees['id']); ?>. <?= htmlspecialchars($donnees['title']); ?></h2>
 						<hr class="divider my-4">
+						<img class="img-fluid img-responsive text-center imgpost" src="<?= $donnees['picture_url']; ?>" alt="">
 						<p class="text-black-50 mb-6 text-justify">
-						Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.
-
-						Dein Syria per speciosam interpatet diffusa planitiem. hanc nobilitat Antiochia, mundo cognita civitas, cui non certaverit alia advecticiis ita adfluere copiis et internis, et Laodicia et Apamia itidemque Seleucia iam inde a primis auspiciis florentissimae.
-
-						Iam in altera philosophiae parte. quae est quaerendi ac disserendi, quae logikh dicitur, iste vester plane, ut mihi quidem videtur, inermis ac nudus est. tollit definitiones, nihil de dividendo ac partiendo docet, non quo modo efficiatur concludaturque ratio tradit, non qua via captiosa solvantur ambigua distinguantur ostendit; iudicia rerum in sensibus ponit, quibus si semel aliquid falsi pro vero probatum sit, sublatum esse omne iudicium veri et falsi putat.
-
-						Procedente igitur mox tempore cum adventicium nihil inveniretur, relicta ora maritima in Lycaoniam adnexam Isauriae se contulerunt ibique densis intersaepientes itinera praetenturis provincialium et viatorum opibus pascebantur.
-
-						Post quorum necem nihilo lenius ferociens Gallus ut leo cadaveribus pastus multa huius modi scrutabatur. quae singula narrare non refert, me professione modum, quod evitandum est, excedamus.
-
-						Ideoque fertur neminem aliquando ob haec vel similia poenae addictum oblato de more elogio revocari iussisse, quod inexorabiles quoque principes factitarunt. et exitiale hoc vitium, quod in aliis non numquam intepescit, in illo aetatis progressu effervescebat, obstinatum eius propositum accendente adulatorum cohorte.
-
-						Has autem provincias, quas Orontes ambiens amnis imosque pedes Cassii montis illius celsi praetermeans funditur in Parthenium mare, Gnaeus Pompeius superato Tigrane regnis Armeniorum abstractas dicioni Romanae coniunxit.
-
-						Pandente itaque viam fatorum sorte tristissima, qua praestitutum erat eum vita et imperio spoliari, itineribus interiectis permutatione iumentorum emensis venit Petobionem oppidum Noricorum, ubi reseratae sunt insidiarum latebrae omnes, et Barbatio repente apparuit comes, qui sub eo domesticis praefuit, cum Apodemio agente in rebus milites ducens, quos beneficiis suis oppigneratos elegerat imperator certus nec praemiis nec miseratione ulla posse deflecti.
-
-						Proinde die funestis interrogationibus praestituto imaginarius iudex equitum resedit magister adhibitis aliis iam quae essent agenda praedoctis, et adsistebant hinc inde notarii, quid quaesitum esset, quidve responsum, cursim ad Caesarem perferentes, cuius imperio truci, stimulis reginae exsertantis aurem subinde per aulaeum, nec diluere obiecta permissi nec defensi periere conplures.
-
-						Inter haec Orfitus praefecti potestate regebat urbem aeternam ultra modum delatae dignitatis sese efferens insolenter, vir quidem prudens et forensium negotiorum oppido gnarus, sed splendore liberalium doctrinarum minus quam nobilem decuerat institutus, quo administrante seditiones sunt concitatae graves ob inopiam vini: huius avidis usibus vulgus intentum ad motus asperos excitatur et crebros.
+						<?= $donnees['content']?>
 						</p>
+						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
 						<br>
 					</div>
 				</div>
 			</div>
 		</section>
+
+<?php
+} // Fin de la boucle des billets
+$req->closeCursor();
+?>
+
+
+<!-- Liste des Commentaires -->
+
+			<section class="page-section bg-primary">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-10 text-center">
+						<h3 class="text-center mt-0">Espace commentaires</h3>
+						<hr class="divider my-4">
+						<p>	Vous souhaitez donner votre avis sur ce Chapitre ? L'espace Commentaire et fait pour vous. Le tout en respectant les règles de courtoisie.
+						</p>
+						<br>
+<?php
+// Connexion à la base de données
+try
+{
+	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+}
+catch(Exception $e)
+{
+        die('Erreur : '.$e->getMessage());
+}
+// On récupère les 5 derniers billets
+$req = $bdd->prepare('SELECT `title`, `author`, DATE_FORMAT(`comment_date`, "Ajouté le %d/%m/%Y") AS `date_comment`, `comment`,`avert` FROM `comments` WHERE `post_id` = ? ORDER BY `comment_date` ');
+$req->execute(array($_GET['id']));
+
+
+while ($donnees = $req->fetch())
+{
+?>
+						<div class="commentitle">
+							<h5><?= htmlspecialchars($donnees['title']); ?></h5>
+							<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
+						</div>
+						<p><?= $donnees['comment']; ?></p>
+						<hr class="divider my-1">
+
+					</div>
+				</div>
+			</div>
+		</section>
+		<br>
+		<br>
+<?php
+} // Fin de la boucle des billets
+$req->closeCursor();
+?>
+
+
+ <!-- Ajouter commentaire -->
+			<section class="page-section bg-primary">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-10 text-center">
+						<h5 class="text-center mt-0">Ajouter Votre Commentaire</h5>
+						<hr class="divider my-4">
+						<br>
+					<form>
+						<div class="row">
+							<div class="col-sm-6">
+								<input class="form-control" type="text" placeholder="Nom ou Pseudo">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<input class="form-control" type="text" placeholder="Titre">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<textarea placeholder="Entrez votre message ici..." class="form-control" rows="9"></textarea>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12 text-right">
+								<input class="btn btn-action" type="submit" value="Envoyer">
+							</div>
+						</div>
+					</form>
+
+
+				</div>
+			</div>
+		</section>
+
+
 
 
 <?php $content = ob_get_clean(); ?>

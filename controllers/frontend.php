@@ -4,7 +4,7 @@ require("models/modelIndex.php");
 
 function home()
 {
-    require('views/accueilView.php');
+	require('views/accueilView.php');
 }
 
 function listPosts()
