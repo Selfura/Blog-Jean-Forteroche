@@ -47,7 +47,7 @@ while ($donnees = $req->fetch())
 <br>
 <br>
 <?php
-} // Fin de la boucle des billets
+} 
 $req->closeCursor();
 ?>
 

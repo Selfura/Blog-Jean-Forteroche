@@ -29,6 +29,8 @@
 
 		<!-- Favicons -->
 		<link rel="shortcut icon" href="images/....jpg">
+		<script src="https://cdn.tiny.cloud/1/2wfjaa4al7b1mrkxi5gpl37sg3dzgd7pcl4pl2g4klxq6g2d/tinymce/5/tinymce.min.js"></script>
+		<script>tinymce.init({selector:'textarea'});</script>
 
 	</head>
 	<body>
@@ -49,7 +51,8 @@
 		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-		<script src="public/js/grayscale.min.js"></script>
-	
+		<script src="public/js/grayscale.js"></script>
+		<script src="public/js/headerscroll.js"></script>
+
 	</body>
 </html>

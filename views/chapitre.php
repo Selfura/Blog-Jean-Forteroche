@@ -51,14 +51,60 @@ $req->closeCursor();
 <!-- Liste des Commentaires -->
 
 			<section class="page-section bg-primary">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-10 text-center">
-						<h3 class="text-center mt-0">Espace commentaires</h3>
+				<div class="container">
+					<h3 class="text-center mt-0">Espace commentaires</h3>
 						<hr class="divider my-4">
-						<p>	Vous souhaitez donner votre avis sur ce Chapitre ? L'espace Commentaire et fait pour vous. Le tout en respectant les règles de courtoisie.
+						<p>	Vous souhaitez donner votre avis sur ce Chapitre ? L'espace Commentaire est fait pour vous. Le tout en respectant les règles de courtoisie.
 						</p>
 						<br>
+							<br>
+							<br>
+						<div class="row">
+				        <div class="col-lg-5 ml-auto">
+				          <h5 class="text-center mt-0">Ajouter Votre Commentaire</h5>
+						<hr class="divider my-4">
+						<br>
+<?php
+try {
+	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+}
+catch(Exception $e) {
+	die('Erreur :' .$e->getMessage());
+}
+
+	$bdd->prepare('INSERT INTO `comments`(`post_id`, `title`, `author`, `comment`, `comment_date`) VALUES( ?, ?, ?, NOW()) ');
+
+
+
+?>
+					<form action="index.php?action=addComment&amp;post_id=<?= $donnees['post_id'] ?>" method="post">
+						<div class="row">
+							<div class="col-sm-12">
+								<input class="form-control" type="text" placeholder="Nom ou Pseudo" id="author" name="author">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<input class="form-control" type="text" placeholder="Titre" name="title" id="title">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<textarea placeholder="Entrez votre message ici..." class="form-control" rows="9" name="comment" id="comment"></textarea>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-6 text-right">
+								<input class="btn btn-action" type="submit" value="Envoyer">
+							</div>
+						</div>
+					</form>
+				        </div>
+
+
 <?php
 // Connexion à la base de données
 try
@@ -76,67 +122,24 @@ $req->execute(array($_GET['id']));
 
 while ($donnees = $req->fetch())
 {
-?>
-						<div class="commentitle">
-							<h5><?= htmlspecialchars($donnees['title']); ?></h5>
+?>	
+				        <div class="col-lg-5 mr-auto text-center">
+							<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
 							<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
-						</div>
 						<p><?= $donnees['comment']; ?></p>
+						<p>Signaler le commentaire</p>
 						<hr class="divider my-1">
-
+						</div>
+					 </div>
 					</div>
-				</div>
-			</div>
 		</section>
 		<br>
 		<br>
+
 <?php
 } // Fin de la boucle des billets
 $req->closeCursor();
 ?>
-
-
- <!-- Ajouter commentaire -->
-			<section class="page-section bg-primary">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-10 text-center">
-						<h5 class="text-center mt-0">Ajouter Votre Commentaire</h5>
-						<hr class="divider my-4">
-						<br>
-					<form>
-						<div class="row">
-							<div class="col-sm-6">
-								<input class="form-control" type="text" placeholder="Nom ou Pseudo">
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-12">
-								<input class="form-control" type="text" placeholder="Titre">
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-12">
-								<textarea placeholder="Entrez votre message ici..." class="form-control" rows="9"></textarea>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-12 text-right">
-								<input class="btn btn-action" type="submit" value="Envoyer">
-							</div>
-						</div>
-					</form>
-
-
-				</div>
-			</div>
-		</section>
-
-
-
 
 <?php $content = ob_get_clean(); ?>
 
