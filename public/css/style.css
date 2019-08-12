@@ -104,6 +104,17 @@ a {
     border-radius: 0.5rem;
 }
 
+#navadm {
+  margin-top: 0em;
+  padding-left: 2em;
+  position: fixed;
+}
+
+
+.admsection {
+  margin-top: 8em;
+}
+
 /* Chapitre */
 
 .chapitre {
@@ -117,10 +128,26 @@ a {
     border-radius: 0.5rem;
 }
 
-.commentitle {
-  display: flex;
-  justify-content: space-around;
+.listCom p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
 
+
+.signal {
+  color: grey;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.comdate {
+  font-size: 0.9em;
+}
+
+/* Footer */
+
+footer {
+  bottom: 0;
 }
 
 

@@ -7,7 +7,12 @@
 <section class="admsection  text-center">
 <a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=newChapter">Ecrire un Nouveau Chapitre</a>
 </section>
-<section class="admsection">
+<br>
+<br>
+
+<section class=" text-center">
+			<h1 class="text-center mt-0">Liste des Chapitres</h2>
+			<br>
 
 <?php
 // Connexion à la base de données
@@ -25,22 +30,22 @@ $req = $bdd->query('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`
 
 while ($donnees = $req->fetch())
 {
-?>
-<section class="admsection  text-center">
+?>			
 	<div class="row">
-				<div class="row justify-content-center">
-					<div class="col-lg-8 text-center">
-						<h2 class="text-center mt-0"><?= htmlspecialchars($donnees['id']); ?>. <?= htmlspecialchars($donnees['title']); ?></h2>
-						<hr class="divider my-4">		
-						<p class="text-black-50 mb-4"><?= substr(htmlspecialchars($donnees['content']), 0, 500).'...'; ?></p>
-						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
-						<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Lire la suite</a>
-						<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Éditer</a>
-						<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
-						<br>
-					</div>
-				</div>
+		<div class="row justify-content-center">
+			<div class="col-lg-8 text-center">
+				<h2 class="text-center mt-0"><?= htmlspecialchars($donnees['id']); ?>. <?= htmlspecialchars($donnees['title']); ?></h2>
+				<hr class="divider my-4">		
+				<p class="text-black-50 mb-4"><?= substr(htmlspecialchars($donnees['content']), 0, 500).'...'; ?></p>
+				<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
+				<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Lire la suite</a>
+				<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Éditer</a>
+				<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
+				<br>
+				<br>
 			</div>
+		</div>
+	</div>
 
 
 </section>

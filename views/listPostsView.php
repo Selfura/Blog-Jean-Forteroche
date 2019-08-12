@@ -13,20 +13,9 @@
 		<br>
 	 <!-- Portfolio Section -->
 <?php
-// Connexion à la base de données
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
-}
-catch(Exception $e)
-{
-        die('Erreur : '.$e->getMessage());
-}
-// On récupère les 5 derniers billets
-$req = $bdd->query('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`, "Publié le %d/%m/%Y") AS `date_creation_fr`, `picture_url` FROM `posts` ORDER BY `id` DESC ');
 
 
-while ($donnees = $req->fetch())
+while ($donnees = $posts->fetch())
 {
 ?>
 
@@ -59,7 +48,7 @@ while ($donnees = $req->fetch())
 
 <?php
 } // Fin de la boucle des billets
-$req->closeCursor();
+$posts->closeCursor();
 ?>
 
 <?php $content = ob_get_clean(); ?>

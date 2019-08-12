@@ -33,6 +33,21 @@ function getComments($post_id) {
 }
 
 function postComment($post_id, $title, $author, $comment) {
+
+	$comments = dbconnect()->prepare('INSERT INTO comments VALUES (NULL, :post_id, :author, :title, :comment, NOW()), 0');
+
+	$coments->bindValue(':post_id', $_GET['id'], PDO::PARAM_INT);
+	$coments->bindValue(':author', $_POST['author'], PDO::PARAM_STR);
+	$coments->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
+	$coments->bindValue(':comment', $_POST['comment'], PDO::PARAM_STR);
+
+	$postComment = $comments->execute(array(':post_id'=> $post_id, ':author'=> $author,':title'=> $title, ':comment'=> $comment ));
+
+	return $postComment;
+
+
+	
+
 	
 }
 
@@ -49,5 +64,6 @@ catch(Exception $e)
         die('Erreur : '.$e->getMessage());
 }
 }
+
 ?>
 

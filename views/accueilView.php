@@ -13,20 +13,8 @@
 		</section>
 		<br>
 <?php
-// Connexion à la base de données
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
-}
-catch(Exception $e)
-{
-        die('Erreur : '.$e->getMessage());
-}
-// On récupère les 5 derniers billets
-$req = $bdd->query('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`, "Publié le %d/%m/%Y") AS `date_creation_fr`, `picture_url` FROM `posts` ORDER BY `id` DESC LIMIT 1');
 
-
-while ($donnees = $req->fetch())
+while ($donnees = $lastPost->fetch())
 {
 ?>
 		<!-- deuxième Section : ? -->
@@ -39,7 +27,7 @@ while ($donnees = $req->fetch())
 						<img class="img-fluid img-responsive text-center imgindex" src="<?= $donnees['picture_url']; ?>" alt="">
 						<p class="text-black-50 mb-4"><?= substr(htmlspecialchars($donnees['content']), 0, 500).'...'; ?></p>
 						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
-						<a class="btn btn-light btn-xl js-scroll-trigger" href="">Lire la suite</a>
+						<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Lire la suite</a>
 					</div>
 				</div>
 			</div>
@@ -48,7 +36,7 @@ while ($donnees = $req->fetch())
 <br>
 <?php
 } 
-$req->closeCursor();
+$lastPost->closeCursor();
 ?>
 
 		<!-- Troisème Section : ? -->

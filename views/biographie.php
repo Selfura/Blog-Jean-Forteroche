@@ -35,42 +35,42 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="mt-5">
-						<i class="fas fa-4x fa-portrait mb-4" ></i>
+						<img class="img-fluid img-responsive text-center" src="public/images/laflute.jpg" alt="La FLute Enragée">
 						<h3 class="h4 mb-2">La flute Enragée</h3>
 						<p class="text-muted mb-0">Si vous voulez en savoir un peu plus sur l'auteur de ce livre, Jean Forteroche, c'est par ici.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="mt-5">
-						<i class="fas fa-4x fa-book mb-4"></i>
+						<img class="img-fluid img-responsive text-center" src="public/images/lejardin.jpg" alt="Le Jardin Céleste">
 						<h3 class="h4 mb-2">Le Jardin Céleste</h3>
 						<p class="text-muted mb-0">Billet Simple pour l'Alaska n'est pas mon premier livre ! Venez découvrir le reste de mes oeuvres.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="mt-5">
-						<i class="fas fa-4x fa-journal-whills mb-4"></i>
+						<img class="img-fluid img-responsive text-center" src="public/images/naufrage.jpg" alt="Survivants du Naufrage">
 						<h3 class="h4 mb-2">Survivants du Naufrage</h3>
 						<p class="text-muted mb-0">Tout a un commencement, et c'est le cas pour ce livre. Si vous arrivez ici pour la première fois, voici le premier chapitre.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="mt-5">
-						<i class="fas fa-4x fa-journal-whills mb-4"></i>
+						<img class="img-fluid img-responsive text-center" src="public/images/roi.jpg" alt="Le Roi des Pirates">
 						<h3 class="h4 mb-2">Le Roi des Pirates</h3>
 						<p class="text-muted mb-0">Tout a un commencement, et c'est le cas pour ce livre. Si vous arrivez ici pour la première fois, voici le premier chapitre.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="mt-5">
-						<i class="fas fa-4x fa-journal-whills mb-4"></i>
+						<img class="img-fluid img-responsive text-center" src="public/images/antarctique.jpg" alt="Pique Nique en Antarctique">
 						<h3 class="h4 mb-2">Pique Nique en Antarctique</h3>
 						<p class="text-muted mb-0">Tout a un commencement, et c'est le cas pour ce livre. Si vous arrivez ici pour la première fois, voici le premier chapitre.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="mt-5">
-						<i class="fas fa-4x fa-journal-whills mb-4"></i>
+						<img class="img-fluid img-responsive text-center" src="public/images/jais.jpg" alt="La bête couleur jais">
 						<h3 class="h4 mb-2">La bête couleur jais</h3>
 						<p class="text-muted mb-0">Tout a un commencement, et c'est le cas pour ce livre. Si vous arrivez ici pour la première fois, voici le premier chapitre.</p>
 					</div>

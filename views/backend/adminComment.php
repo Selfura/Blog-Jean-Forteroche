@@ -4,39 +4,68 @@
 
 <?php require ("views/backend/navAdmin.php") ?>
 
+
+<section class=" page-section admsection">
+	<div class="container">
+		<h3 class="text-center mt-0">Espace commentaires</h3>
+		<hr class="divider my-4">
+		<div class="row justify-content-center">
+			<div class="col-lg-4 mr-auto text-center listCom">
+				<h5 class="text-center mt-0">Commentaires en Attente</h5>
+				<hr class="divider my-3">
+
 <?php
-// Connexion à la base de données
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
-}
-catch(Exception $e)
-{
-        die('Erreur : '.$e->getMessage());
-}
-// On récupère les 5 derniers billets
-$req = $bdd->query('SELECT `title`, `author`, DATE_FORMAT(`comment_date`, "Ajouté le %d/%m/%Y") AS `date_comment`, `comment`,`avert` FROM `comments` ORDER BY `comment_date` ');
 
-
-while ($donnees = $req->fetch())
+while ($donnees = $allCom->fetch())
 {
 ?>	
-<section class="admsection">
-	<div class="row justify-content-center">
-		<div class="col-lg-8 text-center">
-			<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
-			<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
-			<p><?= $donnees['comment']; ?></p>
-			<hr class="divider my-1">
+
+				<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
+				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
+				<p><?= $donnees['comment']; ?></p>
+				<a class="btn btn-xl js-scroll-trigger" href="">Supprimer</a>
+				<hr class="divider my-2">
+
+
+<?php
+} // Fin de la boucle des billets
+$allCom->closeCursor();
+?>
+			</div>
+
+			<div class="col-lg-4 mr-auto text-center listCom">
+				<h5 class="text-center mt-0">Commentaires Signalés</h5>
+				<hr class="divider my-3">
+
+
+				<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
+				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
+				<p><?= $donnees['comment']; ?></p>
+				<a class="btn btn-xl js-scroll-trigger" href=">">Supprimer</a>
+				<hr class="divider my-2">
+			</div>
+
+
+			<div class="col-lg-4 mr-auto text-center listCom">
+				<h5 class="text-center mt-0">Commentaires validés</h5>
+				<hr class="divider my-3">
+
+
+				<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
+				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
+				<p><?= $donnees['comment']; ?></p>
+				<a class="btn btn-xl js-scroll-trigger" href=">">Supprimer</a>
+				<hr class="divider my-2">
+			</div>
+
+
+
 		</div>
 	</div>
 </section>
 
 
-<?php
-} // Fin de la boucle des billets
-$req->closeCursor();
-?>
+
 
 
 <?php $content = ob_get_clean(); ?>

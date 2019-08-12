@@ -25,7 +25,7 @@ switch ($_GET['action']) {
 
     case 'post':
      if ($_GET['id'] > 0) {
-    	post();
+    	post($_GET['id']);
         }
         else
                 {
@@ -33,10 +33,13 @@ switch ($_GET['action']) {
                 }
     	break;
 
-    case 'addComment':
-        if (isset($_GET['post_id']) && $_GET['post_id'] > 0) {
-            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                addComment($_GET['post_id'], $_POST['author'], $_POST['comment']);
+    case 'addComment': // INDEX
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if (!empty($_POST['author']) && !empty($_POST['title']) &&  !empty($_POST['comment'])) {
+ 
+                    addComment($_GET['id'], htmlspecialchars($_POST['author']), htmlspecialchars($_POST['title']), htmlspecialchars($_POST['comment']));
+
+                
             }
             else {
                 throw new Exception('Tous les champs doivent être remplis !');
@@ -67,7 +70,19 @@ switch ($_GET['action']) {
     case 'newChapter':
         newChapter();
         break;
+        
+    case 'supprmail':
+        supprmail();
+        break;
 
+    case 'addChapter':
+        addChapter();
+        break; 
+
+
+    case 'addMail':
+        addMail();      
+        break;  
 }
 }
 else {

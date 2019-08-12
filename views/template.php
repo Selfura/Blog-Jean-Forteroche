@@ -30,7 +30,7 @@
 		<!-- Favicons -->
 		<link rel="shortcut icon" href="images/....jpg">
 		<script src="https://cdn.tiny.cloud/1/2wfjaa4al7b1mrkxi5gpl37sg3dzgd7pcl4pl2g4klxq6g2d/tinymce/5/tinymce.min.js"></script>
-		<script>tinymce.init({selector:'textarea'});</script>
+		<script>tinymce.init({selector:'#newChapter'});</script>
 
 	</head>
 	<body>
