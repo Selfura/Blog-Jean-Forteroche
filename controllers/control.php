@@ -52,6 +52,30 @@ function addComment($post_id, $author, $title, $comment) {
 	}
 }
 
+// MAIL 
+
+function addMail() {
+
+	$commentManager = new commentManager();
+	$mail = $commentManager->addMail();
+
+	if($mail !== true) {
+		$commentManager = new commentManager();
+		}
+		else {
+		echo "Echec de l'envoi";
+		header('Refresh: 2; url=../jeanforteroche/index.php?action=accueil');
+		}
+
+}
+/*  
+	***********************************************************************
+
+								ZONE ADMIN
+
+	***********************************************************************
+*/
+
 function login()
 {
 	require("views/backend/Adminlogin.php");
@@ -61,6 +85,20 @@ function admin()
 {
 	require('views/backend/AdminView.php');
 }
+// POSTS 
+
+function newChapter()
+{
+	require('views/backend/newChapter.php');
+}
+
+function addChapter()
+{
+	require('views/backend/addChapter.php');
+}
+
+// COMMENTAIRES
+
 
 function admcom()
 {
@@ -69,15 +107,29 @@ function admcom()
 	require('views/backend/adminComment.php');
 }
 
+
+function deleteComment($id) {
+
+	$commentManager = new commentManager();
+	$deleteComment = $commentManager->deleteComment($id);
+
+	if($deleteComment === false) {
+		throw new Exception('Impossible de supprimer le commentaire');
+	}
+	else {
+		echo "Le commentaire a été supprimé.";
+		header('Refresh: 2; url=../jeanforteroche/index.php?action=admin');
+	}
+}
+
+
+// MAIL 
+
 function admail()
 {
 	require("views/backend/mailAdmin.php");
 }
 
-function newChapter()
-{
-	require('views/backend/newChapter.php');
-}
 function supprmail()
 {	
 
@@ -92,25 +144,4 @@ function supprmail()
 		echo "Echec de la suppression";
 		throw new Exception("Impossible de supprimer !");
 	}
-}
-
-function addChapter()
-{
-	require('views/backend/addChapter.php');
-}
-
-function addMail() {
-
-	$commentManager = new commentManager();
-	$mail = $commentManager->addMail();
-
-	if($mail !== true) {
-		echo "Le mail a été envoyé";
-		header('Refresh: 2; url=../jeanforteroche/index.php?action=accueil');
-		}
-		else {
-		echo "Echec de l'envoi";
-		header('Refresh: 2; url=../jeanforteroche/index.php?action=accueil');
-		}
-
 }

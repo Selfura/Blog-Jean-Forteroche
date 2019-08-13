@@ -1,6 +1,6 @@
 <?php
 
-require('controllers/frontend.php');
+require('controllers/control.php');
 
 if(isset($_GET['action'])) {
 
@@ -63,6 +63,17 @@ switch ($_GET['action']) {
         admcom();
         break;
 
+
+    case 'deleteComment':
+        if (isset($_GET['id']) && $_GET['id'] > 0){
+
+            deleteComment($_GET['id']);
+        } 
+        else {
+                    throw new Exception('Aucun identifiant de commentaire envoyé !');
+        }
+        break;
+
     case 'admail':
         admail();
         break;
@@ -86,5 +97,6 @@ switch ($_GET['action']) {
 }
 }
 else {
+    home();
 	require_once('views/accueilView.php');
 }
