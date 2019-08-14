@@ -2,10 +2,14 @@
 
 require("models/commentManager.php");
 require("models/postManager.php");
+require("models/mailManager.php");
 
 use Jeanforteroche\models\PostManager;
 use Jeanforteroche\models\CommentManager;
+use Jeanforteroche\models\MailManager;
 
+
+// PAGES 
 function home()
 {	
 
@@ -21,12 +25,15 @@ function listPosts()
 	$posts = $postManager->getPosts();
     require('views/listPostsView.php');
 }
+
 function bio() {
 	require("views/biographie.php");
 }
+
 function contact() {
 	require("views/contact.php");
 }
+
 function post($post_id)
 {	
 	$postManager = new PostManager();
@@ -34,10 +41,14 @@ function post($post_id)
 
 	$post = $postManager->getPost($post_id);
     $comments = $commentManager->getComments($post_id);
-    $signal = $commentManager->signalComment($post_id);
+    $signal = $commentManager->reportComment($post_id);
 
     require('views/chapitre.php');
 }
+/*
+			COMMENTAIRES 
+*/
+// fonction d'envoie de commentaires
 function addComment($post_id, $author, $title, $comment) {
 
 	$commentManager = new CommentManager();
@@ -52,15 +63,25 @@ function addComment($post_id, $author, $title, $comment) {
 	}
 }
 
-// MAIL 
+function reportComment($id) {
+
+	$commentManager = new CommentManager();
+
+	$reportComment = $commentManager->reportComment($id);
+	header('Refresh:0, url=../jeanforteroche/index.php?action=post&amp;id=<?= $donnees["id"] ?>');
+}
+
+// MAIL Fonction d'envoie.
 
 function addMail() {
 
-	$commentManager = new commentManager();
-	$mail = $commentManager->addMail();
+	$mailManager = new MailManager();
+	$mail = $mailManager->addMail();
 
 	if($mail !== true) {
-		$commentManager = new commentManager();
+		$mailManager = new MailManager();
+		echo "Mail Envoyé";
+		header('Refresh: 2; url=../jeanforteroche/index.php?action=accueil');
 		}
 		else {
 		echo "Echec de l'envoi";
@@ -103,45 +124,68 @@ function addChapter()
 function admcom()
 {
 	$commentManager = new CommentManager();
-	$allCom = $commentManager->getAllComments();
+	$comments = $commentManager->getAllComments();
+	$reportComments = $commentManager->getReportComments();
+	$approvedComments = $commentManager->getApproveComment();
 	require('views/backend/adminComment.php');
 }
 
-
 function deleteComment($id) {
 
-	$commentManager = new commentManager();
+	$commentManager = new CommentManager();
 	$deleteComment = $commentManager->deleteComment($id);
 
 	if($deleteComment === false) {
 		throw new Exception('Impossible de supprimer le commentaire');
 	}
 	else {
-		echo "Le commentaire a été supprimé.";
-		header('Refresh: 2; url=../jeanforteroche/index.php?action=admin');
+		header('Refresh: 0; url=../jeanforteroche/index.php?action=admcom');
 	}
+}
+
+function approveComment($id) {
+	$commentManager = new CommentManager();
+	$approveComment = $commentManager->approveComment($id);
+
+	if($approveComment === false) {
+		throw new Exception('Impossible de supprimer le commentaire');
+	}
+	else {
+		header('Refresh: 0; url=../jeanforteroche/index.php?action=admcom');
+	}
+
 }
 
 
 // MAIL 
 
-function admail()
-{
+function admail() {
+
+	$mailManager = new MailManager();
+	$mails = $mailManager->getAllMails();
+	$readMail = $mailManager->GetReadMail();
 	require("views/backend/mailAdmin.php");
 }
 
-function supprmail()
-{	
+function deleteMail($id) {	
 
-	$commentManager = new CommentManager();
+	$mailManager = new MailManager();
 
-	$delete = $commentManager->delMail();
-	if($delete === true){
-		echo "Le mail a été supprimé";
-		header('Refresh: 2; url=../jeanforteroche/index.php?action=admail');
+	$deleteMail = $mailManager->deleteMail($id);
+	if($deleteMail === false){
+		echo "Echec de la suppression";
+		throw new Exception("Impossible de supprimer !");		
 	}
 	else {
-		echo "Echec de la suppression";
-		throw new Exception("Impossible de supprimer !");
+		header('Refresh: 2; url=../jeanforteroche/index.php?action=admail');
 	}
+}
+
+function readMail($id) {
+
+	$mailManager = new MailManager();
+
+	$readMail = $mailManager->readMail($id);
+	header('Refresh:0, url=../jeanforteroche/index.php?action=admail');
+
 }

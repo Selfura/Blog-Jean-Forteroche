@@ -16,20 +16,21 @@
 
 <?php
 
-while ($donnees = $allCom->fetch())
+while ($donnees = $comments->fetch())
 {
 ?>	
 
 				<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
 				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
 				<p><?= $donnees['comment']; ?></p>
-				<a class="btn btn-xl js-scroll-trigger" href="">Supprimer</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=approveComment&amp;id=<?= $donnees['id'] ?>">Valider</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
 				<hr class="divider my-2">
 
 
 <?php
 } // Fin de la boucle des billets
-$allCom->closeCursor();
+$comments->closeCursor();
 ?>
 			</div>
 
@@ -37,12 +38,21 @@ $allCom->closeCursor();
 				<h5 class="text-center mt-0">Commentaires Signalés</h5>
 				<hr class="divider my-3">
 
+<?php
 
+while ($donnees = $reportComments->fetch())
+{
+?>
 				<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
 				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
 				<p><?= $donnees['comment']; ?></p>
-				<a class="btn btn-xl js-scroll-trigger" href=">">Supprimer</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=approveComment&amp;id=<?= $donnees['id'] ?>">Valider</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
 				<hr class="divider my-2">
+<?php
+} // Fin de la boucle des billets
+$reportComments->closeCursor();
+?>
 			</div>
 
 
@@ -50,12 +60,20 @@ $allCom->closeCursor();
 				<h5 class="text-center mt-0">Commentaires validés</h5>
 				<hr class="divider my-3">
 
+<?php
 
+while ($donnees = $approvedComments->fetch())
+{
+?>
 				<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
 				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
 				<p><?= $donnees['comment']; ?></p>
-				<a class="btn btn-xl js-scroll-trigger" href=">">Supprimer</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
 				<hr class="divider my-2">
+<?php
+} // Fin de la boucle des billets
+$approvedComments->closeCursor();
+?>
 			</div>
 
 

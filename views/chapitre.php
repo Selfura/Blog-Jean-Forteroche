@@ -62,7 +62,7 @@
 						</div>
 						<br>
 							<div class="text-right">
-								<p>En cliquant sur Envoyer, vous acceptez que les données saisies nous permettent de vous contacter.<p>
+								<p>En cliquant sur Envoyer, vous acceptez le traitement de vos données pour garantir une bonne expérience sur notre site. Conformément aux lois relative à la protection des données personnelles.<p>
 								<input class="btn btn-action" type="submit" value="Envoyer">
 						</div>
 					</form>
@@ -81,7 +81,7 @@ while ($comment = $comments->fetch())
 							<p class="comdate"><?= $comment['date_comment']; ?> par <em><?= $comment['author']; ?></em></p>
 							<p><?= $comment['comment']; ?></p>
 							<a onclick="return(confirm('Etes-vous sûr de vouloir signaler ce commentaire ?'));" >
-								<p class="signal" name="avert">Signaler le commentaire</p>
+								<p class="signal" name="avert" href="index.php?action=reportComment&amp;id=<?= $comment['id'] ?>">Signaler le commentaire</p>
 							</a>
 							<hr class="divider my-1">
 <?php

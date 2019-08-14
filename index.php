@@ -74,6 +74,16 @@ switch ($_GET['action']) {
         }
         break;
 
+    case 'approveComment':
+        if (isset($_GET['id']) && $_GET['id'] > 0){
+
+            approveComment($_GET['id']);
+        } 
+        else {
+                    throw new Exception('Aucun identifiant de commentaire envoyé !');
+        }
+        break;
+
     case 'admail':
         admail();
         break;
@@ -93,10 +103,29 @@ switch ($_GET['action']) {
 
     case 'addMail':
         addMail();      
-        break;  
+        break; 
+
+    case 'deleteMail':
+        if (isset($_GET['id']) && $_GET['id'] > 0){
+
+            deleteMail($_GET['id']);
+        } 
+        else {
+                    throw new Exception('Aucun identifiant de mail envoyé !');
+        }
+        break;
+
+    case 'readMail':
+        if (isset($_GET['id']) && $_GET['id'] > 0){
+
+            readMail($_GET['id']);
+        } 
+        else {
+                    throw new Exception('Aucun identifiant de mail envoyé !');
+        }
+        break;
 }
 }
 else {
     home();
-	require_once('views/accueilView.php');
 }
