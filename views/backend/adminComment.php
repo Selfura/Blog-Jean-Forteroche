@@ -24,7 +24,7 @@ while ($donnees = $comments->fetch())
 				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
 				<p><?= $donnees['comment']; ?></p>
 				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=approveComment&amp;id=<?= $donnees['id'] ?>">Valider</a>
-				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));">Supprimer</a>
 				<hr class="divider my-2">
 
 
@@ -47,7 +47,7 @@ while ($donnees = $reportComments->fetch())
 				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
 				<p><?= $donnees['comment']; ?></p>
 				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=approveComment&amp;id=<?= $donnees['id'] ?>">Valider</a>
-				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));">Supprimer</a>
 				<hr class="divider my-2">
 <?php
 } // Fin de la boucle des billets
@@ -68,7 +68,7 @@ while ($donnees = $approvedComments->fetch())
 				<h5 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h5>
 				<p><?= $donnees['date_comment']; ?> par <em><?= $donnees['author']; ?></em></p>
 				<p><?= $donnees['comment']; ?></p>
-				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
+				<a class="btn btn-xl js-scroll-trigger" href="index.php?action=deleteComment&amp;id=<?= $donnees['id'] ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));">Supprimer</a>
 				<hr class="divider my-2">
 <?php
 } // Fin de la boucle des billets

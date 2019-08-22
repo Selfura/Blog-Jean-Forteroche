@@ -3,10 +3,12 @@
 require("models/commentManager.php");
 require("models/postManager.php");
 require("models/mailManager.php");
+require("models/adminManager.php");
 
 use Jeanforteroche\models\PostManager;
 use Jeanforteroche\models\CommentManager;
 use Jeanforteroche\models\MailManager;
+use Jeanforteroche\models\AdminManager;
 
 
 // PAGES 
@@ -56,6 +58,7 @@ function addComment($post_id, $author, $title, $comment) {
 	$newComment = $commentManager->addComment($post_id, $author, $title, $comment);
 	if($newComment === true){
 		echo "Le commentaire a été posté.";
+		header('Refresh:2; url=../jeanforteroche/index.php?action=listechapitres');
 	}
 	else {
 		echo "Echec de l'envoi";
@@ -68,7 +71,7 @@ function reportComment($id) {
 	$commentManager = new CommentManager();
 
 	$reportComment = $commentManager->reportComment($id);
-	header('Refresh:0, url=../jeanforteroche/index.php?action=post&amp;id=<?= $donnees["id"] ?>');
+	header('Refresh:0; url=../jeanforteroche/index.php?action=listechapitres');
 }
 
 // MAIL Fonction d'envoie.
@@ -99,24 +102,74 @@ function addMail() {
 
 function login()
 {
+
 	require("views/backend/Adminlogin.php");
 }
 
+function logout() {
+
+   session_destroy();
+}
+
 function admin()
-{
+{	
+	session_start();
+	$postManager = new PostManager();
+	$posts = $postManager->getPosts();
 	require('views/backend/AdminView.php');
 }
 // POSTS 
 
+// Page Nouveau Chapitre
 function newChapter()
 {
 	require('views/backend/newChapter.php');
 }
+//Ajout de chapitre
+function newPost($title, $content) {
 
-function addChapter()
-{
-	require('views/backend/addChapter.php');
+	$postManager = new PostManager();
+	$createPost = $postManager->createPost($title, $content);
+
+	header('Location: ../jeanforteroche/index.php?action=admin');
 }
+
+// Edit chapitre
+
+function updatePost($id, $title, $content, $picture) {
+
+	$postManager = new PostManager();
+	$updatePost = $postManager->updatePost($id, $title, $content, $picture);
+
+	if($updatePost === false) {
+		throw new Exception('Impossible de mettre à jour le chapitre');
+	} else {
+
+	header('Location: ../jeanforteroche/index.php?action=admin');
+	}
+}
+
+function deletePost($id) {
+
+	$postManager = new postManager();
+	$deletePost = $postManager->deletePost($id);
+
+	if($deletePost === false) {
+		throw new Exception('Impossible de supprimer le chapitre');
+	}
+	else {
+		header('Refresh: 0; url=../jeanforteroche/index.php?action=admin');
+	}
+}
+function editPost($post_id) {
+	$postManager = new postManager();
+	$editPost = $postManager->getPost($post_id);
+
+	$post = $postManager->getPost($post_id);
+
+	require('views/backend/editView.php');
+}
+
 
 // COMMENTAIRES
 

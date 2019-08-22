@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<meta charset="utf-8" />
+		<meta charset="utf-8">
 		<link rel="stylesheet" href="public/bootstrap/bootstrap.min.css" />
 		<link rel="stylesheet" href="public/css/bootstrap.css"/>
 		<link rel="stylesheet" href="public/css/style.css" />
@@ -29,8 +29,8 @@
 
 		<!-- Favicons -->
 		<link rel="shortcut icon" href="images/....jpg">
-		<script src="https://cdn.tiny.cloud/1/2wfjaa4al7b1mrkxi5gpl37sg3dzgd7pcl4pl2g4klxq6g2d/tinymce/5/tinymce.min.js"></script>
-		<script>tinymce.init({selector:'#newChapter'});</script>
+		<script src="public/js/tinymce/tinymce.min.js"></script>
+		<script>tinymce.init({selector:'#newChapter', language: 'fr_FR'});</script>
 
 	</head>
 	<body>

@@ -24,7 +24,7 @@ while ($donnees = $mails->fetch())
 				<p><?= $donnees['mail']; ?></p>
 				<p><?= $donnees['message']; ?></p>
 				<a class="btn btn-light js-scroll-trigger " href="index.php?action=readMail&amp;id=<?= $donnees['id'] ?>">Lu</a>
-				<a class="btn btn-light js-scroll-trigger" href="index.php?action=deleteMail&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
+				<a class="btn btn-light js-scroll-trigger" href="index.php?action=deleteMail&amp;id=<?= $donnees['id'] ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce mail ?'));">Supprimer</a>
 				<hr class="divider my-1">
 <?php
 } // Fin de la boucle des billets
@@ -47,7 +47,7 @@ while ($donnees = $readMail->fetch())
 				<p><?= $donnees['mail_date']; ?> par <em><?= $donnees['author']; ?></em></p>
 				<p><?= $donnees['mail']; ?></p>
 				<p><?= $donnees['message']; ?></p>
-				<a class="btn btn-light js-scroll-trigger" href="index.php?action=deleteMail&amp;id=<?= $donnees['id'] ?>">Supprimer</a>
+				<a class="btn btn-light js-scroll-trigger" href="index.php?action=deleteMail&amp;id=<?= $donnees['id'] ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce mail ?'));">Supprimer</a>
 				<hr class="divider my-1">
 
 <?php

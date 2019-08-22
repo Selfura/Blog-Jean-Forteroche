@@ -10,11 +10,11 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-12 text-center">
-						<h2 class="text-center mt-0"><?= htmlspecialchars($post['id']); ?>. <?= htmlspecialchars($post['title']); ?></h2>
+						<h2 class="text-center mt-0"><?= htmlspecialchars($post['title']); ?></h2>
 						<hr class="divider my-4">
-						<img class="img-fluid img-responsive text-center imgpost" src="<?= $post['picture_url']; ?>" alt="">
+						<img class="img-fluid img-responsive text-center imgpost" src="<?= $post['picture']; ?>" alt="">
 						<p class="text-black-50 mb-6 text-justify">
-						<?= htmlspecialchars($post['content']); ?>
+						<?= ($post['content']); ?>
 						</p>
 						<p class="text-black-50 mb-4"><?= $post['date_creation_fr']; ?></p>
 						<br>
@@ -80,8 +80,8 @@ while ($comment = $comments->fetch())
 							<h5 class="text-center mt-0"><?= htmlspecialchars($comment['title']); ?></h5>
 							<p class="comdate"><?= $comment['date_comment']; ?> par <em><?= $comment['author']; ?></em></p>
 							<p><?= $comment['comment']; ?></p>
-							<a onclick="return(confirm('Etes-vous sûr de vouloir signaler ce commentaire ?'));" >
-								<p class="signal" name="avert" href="index.php?action=reportComment&amp;id=<?= $comment['id'] ?>">Signaler le commentaire</p>
+							<a onclick="return(confirm('Etes-vous sûr de vouloir signaler ce commentaire ?'));" href="index.php?action=reportComment&amp;post_id=<?= $post['id'] ?>&amp;id=<?= $comment['id'] ?>"  name="avert">
+								<p class="signal">Signaler le commentaire</p>
 							</a>
 							<hr class="divider my-1">
 <?php

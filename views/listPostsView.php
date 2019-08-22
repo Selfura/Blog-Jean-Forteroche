@@ -20,19 +20,19 @@ while ($donnees = $posts->fetch())
 ?>
 
 	 <!-- Portfolio Section -->
-	<section class="page-section portfolio" id="chapter">
+	<section class="page-section portfolio">
 		<div class="container">
 
 			<!-- Portfolio Grid Items -->
 			<div class="row">
 				<div class="row justify-content-center">
 					<div class="col-lg-10 text-center">
-						<h2 class="text-center mt-0"><?= htmlspecialchars($donnees['id']); ?>. <?= htmlspecialchars($donnees['title']); ?></h2>
+						<h2 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h2>
 						<hr class="divider my-4">		
 						<a href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">
-						<img class="img-fluid img-responsive text-center imgchap" src="<?= $donnees['picture_url']; ?>" alt="">
+						<img class="img-fluid img-responsive text-center imgchap" src="<?= $donnees['picture']; ?>" alt="">
 						</a>
-						<p class="text-black-50 mb-4"><?= substr(htmlspecialchars($donnees['content']), 0, 200).'...'; ?></p>
+						<p class="text-black-50 mb-4"><?= substr(($donnees['content']), 0, 200).'...'; ?></p>
 						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
 						<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Lire la suite</a>
 						<br>

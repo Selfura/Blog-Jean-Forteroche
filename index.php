@@ -28,9 +28,9 @@ switch ($_GET['action']) {
     	post($_GET['id']);
         }
         else
-                {
+            {
                     throw new Exception('Aucun Chapitre ne porte cet identifiant !');
-                }
+            }
     	break;
 
     case 'addComment': // INDEX
@@ -50,6 +50,20 @@ switch ($_GET['action']) {
         }
         break;
 
+    case 'reportComment':
+        if (isset($_GET['post_id']) && $_GET['post_id'] > 0) {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                reportComment($_GET['id']);
+            } else {
+                throw new Exception("L'identifiant du commentaire à signaler n'a pas ététrouvé.");
+                
+            }
+
+        } else {
+                throw new Exception("Aucun identifiant de chapitre.");
+                
+            }
+
 
     case 'login':
         login();
@@ -62,7 +76,15 @@ switch ($_GET['action']) {
     case 'admcom':
         admcom();
         break;
+    case 'deletePost':
+        if (isset($_GET['id']) && $_GET['id'] > 0){
 
+            deletePost($_GET['id']);
+        } 
+        else {
+                    throw new Exception('Aucun identifiant de commentaire envoyé !');
+        }
+        break;
 
     case 'deleteComment':
         if (isset($_GET['id']) && $_GET['id'] > 0){
@@ -97,7 +119,13 @@ switch ($_GET['action']) {
         break;
 
     case 'addChapter':
-        addChapter();
+        if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
+        newPost($_POST['title'], $_POST['content']);
+        }
+        else {
+            throw new Exception("Les champs doivent tous être remplis.");
+            
+        }
         break; 
 
 
@@ -124,6 +152,32 @@ switch ($_GET['action']) {
                     throw new Exception('Aucun identifiant de mail envoyé !');
         }
         break;
+
+    // Page EDIT
+    case 'editPost':
+     if (isset($_GET['id']) && $_GET['id'] > 0) {
+        editPost($_GET['id']);
+        }
+        else
+                {
+                    throw new Exception('Aucun Chapitre ne porte cet identifiant !');
+                }
+        break;
+    //fonction Edit
+    case 'updatePost':
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
+            updatePost($_GET['id'], $_POST['title'], $_POST['content'], $_POST['picture']);
+            } else {
+                throw new Exception('Il faut remplir tous les champs.');
+            }
+        }
+        else
+                {
+                    throw new Exception('Aucun Chapitre ne porte cet identifiant !');
+                }
+        break;
+
 }
 }
 else {

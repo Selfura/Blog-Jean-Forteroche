@@ -2,7 +2,7 @@
 
 namespace JeanForteroche\models;
 
-require_once("models/manager.php");
+require_once("models/Manager.php");
 
 class PostManager extends Manager {
 
@@ -10,7 +10,7 @@ class PostManager extends Manager {
 		// On récupère tous les chapitres du plus récent au plus vieu.
 		$db = $this->dbConnect();
 
-		$req = $db->query('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`, "Publié le %d/%m/%Y") AS `date_creation_fr`, `picture_url` FROM `posts` ORDER BY `id` DESC ');
+		$req = $db->query('SELECT id, title, content, DATE_FORMAT(date_creation, "Publié le %d/%m/%Y") AS date_creation_fr, picture FROM posts ORDER BY id DESC ');
 		return $req;
 		
 	}
@@ -19,7 +19,7 @@ class PostManager extends Manager {
 
 		$db = $this->dbConnect();
 		// On récupère le dernière chapitre.
-		$req = $db->query('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`, "Publié le %d/%m/%Y") AS `date_creation_fr`, `picture_url` FROM `posts` ORDER BY `date_creation` DESC LIMIT 1');
+		$req = $db->query('SELECT id, title, content, DATE_FORMAT(date_creation, "Publié le %d/%m/%Y") AS date_creation_fr, picture FROM posts ORDER BY date_creation DESC LIMIT 1');
 		return $req;
 	}
 
@@ -27,7 +27,7 @@ class PostManager extends Manager {
 		$db = $this->dbConnect();
 		//on récupère un chapitre via son id
 
-		$req = $db->prepare('SELECT `id`, `title`, `content`, DATE_FORMAT(`date_creation`, "Publié le %d/%m/%Y") AS `date_creation_fr`, `picture_url` FROM `posts` WHERE `id`= ? ');
+		$req = $db->prepare('SELECT id, title, content, DATE_FORMAT(date_creation, "Publié le %d/%m/%Y") AS date_creation_fr, picture FROM posts WHERE id= ? ');
 		$req->execute(array($post_id));
 		$post = $req->fetch();
 
@@ -35,21 +35,39 @@ class PostManager extends Manager {
 	}
 
 
-	public function createPost() {
+	public function createPost($title, $content) {
 		$db = $this->dbConnect();
 		// on crée un nouveau post
+
+		$post = $db->prepare('INSERT INTO posts(title, content, date_creation) VALUES (?, ?, NOW())');
+		$createPost = $post->execute(array($title, $content));
+
+		return $createPost;
 	}
 
 
 	public function updatePost() {
 		$db = $this->dbConnect();
 		// on édite un chapitre
+		$post = $db->prepare('UPDATE posts SET title= :title, content=:content, date_creation= NOW(), picture= :picture WHERE id= :id');
+		$post->bindParam('title',$title, \PDO::PARAM_STR);
+		$post->bindParam('content',$content, \PDO::PARAM_STR);
+		$post->bindParam('picture',$picture, \PDO::PARAM_STR);
+		$post->bindParam('id', $id, \PDO::PARAM_INT);
+
+		$updatePost = $post->execute();
+
+		return $updatePost;
 	}
 
 
-	public function deletePost() {
+	public function deletePost($id) {
 		$db = $this->dbConnect();
 		// on supprime un chapitre
+		$post = $db->prepare('DELETE FROM posts WHERE id= ?');
+		$deletePost = $post->execute(array($id));
+
+		return $deletePost;
 	}
 
 }
