@@ -58,7 +58,7 @@ function addComment($post_id, $author, $title, $comment) {
 	$newComment = $commentManager->addComment($post_id, $author, $title, $comment);
 	if($newComment === true){
 		echo "Le commentaire a été posté.";
-		header('Refresh:2; url=../jeanforteroche/index.php?action=listechapitres');
+		header('Refresh:2; url=../jeanforteroche/index.php?action=post&id='.$_GET['id']);
 	}
 	else {
 		echo "Echec de l'envoi";
@@ -71,7 +71,14 @@ function reportComment($id) {
 	$commentManager = new CommentManager();
 
 	$reportComment = $commentManager->reportComment($id);
-	header('Refresh:0; url=../jeanforteroche/index.php?action=listechapitres');
+
+	if($reportComment === true) {
+		echo "Le commentaire a été signalé.";
+		header('Refresh:2; url=../jeanforteroche/index.php?action=post&id='.$_GET['post_id']);
+	} else {
+		echo "Echec de l'envoi";
+		throw new Exceptio("Impossible de signaler le commentaire.");
+	}
 }
 
 // MAIL Fonction d'envoie.
@@ -126,20 +133,20 @@ function newChapter()
 	require('views/backend/newChapter.php');
 }
 //Ajout de chapitre
-function newPost($title, $content) {
+function newPost($title, $content, $picture) {
 
 	$postManager = new PostManager();
-	$createPost = $postManager->createPost($title, $content);
+	$createPost = $postManager->createPost($title, $content, $picture);
 
 	header('Location: ../jeanforteroche/index.php?action=admin');
 }
 
 // Edit chapitre
 
-function updatePost($id, $title, $content, $picture) {
+function updatePost($id) {
 
 	$postManager = new PostManager();
-	$updatePost = $postManager->updatePost($id, $title, $content, $picture);
+	$updatePost = $postManager->updatePost($id);
 
 	if($updatePost === false) {
 		throw new Exception('Impossible de mettre à jour le chapitre');

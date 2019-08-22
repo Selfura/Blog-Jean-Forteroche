@@ -63,6 +63,7 @@ switch ($_GET['action']) {
                 throw new Exception("Aucun identifiant de chapitre.");
                 
             }
+        break;
 
 
     case 'login':
@@ -119,8 +120,8 @@ switch ($_GET['action']) {
         break;
 
     case 'addChapter':
-        if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
-        newPost($_POST['title'], $_POST['content']);
+        if ($_POST['title'] != NULL && $_POST['content'] != NULL && $_POST['picture'] != NULL) {
+        newPost($_POST['title'], $_POST['content'], $_POST['picture']);
         }
         else {
             throw new Exception("Les champs doivent tous être remplis.");
@@ -167,7 +168,7 @@ switch ($_GET['action']) {
     case 'updatePost':
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
-            updatePost($_GET['id'], $_POST['title'], $_POST['content'], $_POST['picture']);
+                updatePost($_GET['id']);
             } else {
                 throw new Exception('Il faut remplir tous les champs.');
             }
