@@ -114,7 +114,7 @@ function login()
 }
 
 function logout() {
-	session_start();
+
 	$_SESSION = array();
 	session_destroy();
 
@@ -130,10 +130,24 @@ function admin($login)
 	if ($_POST['login'] == $logAdmin['login']  && $_POST['pw'] == $logAdmin['pw']) {
 		$_SESSION['login'] = $logAdmin['login'];
 		$_SESSION['pw'] = $logAdmin['pw'];
+
+		$login = $logAdmin['login'];
+		$pw = $logAdmin['pw'];
+
+		setcookie('login', $login, time() + 1800, null, null, false, true);
+		setcookie('pw', $pw, time() + 1800, null, null, false, true);
+
 		$postManager = new PostManager();
 		$posts = $postManager->getPosts();
 		require('views/backend/AdminView.php');
-	} else {
+	} elseif ($_COOKIE['login']) {
+		$postManager = new PostManager();
+		$posts = $postManager->getPosts();
+		require('views/backend/AdminView.php');
+	} 
+
+
+	else {
 		echo "Mot de passe ou Identifiant erroné(s)";
 	}
 }
@@ -197,6 +211,7 @@ function editPost($post_id) {
 
 function admcom()
 {	
+
 	$commentManager = new CommentManager();
 	$comments = $commentManager->getAllComments();
 	$reportComments = $commentManager->getReportComments();

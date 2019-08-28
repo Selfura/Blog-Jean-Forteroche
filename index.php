@@ -70,10 +70,81 @@ switch ($_GET['action']) {
         login();
         break;
 
-    case 'admcom':
+
+    case 'addMail':
+        addMail();      
+        break; 
+
+        case 'logout':
         session_start();
-        admcom();
+        $_SESSION = array();
+        session_destroy();
+            logout();
         break;
+
+
+        // ADMIN 
+
+    case 'admin':
+        if(isset($_POST['login'])) {
+            session_start();
+            admin($_POST['login']);
+        }
+        else {
+            header('Location: ../jeanforteroche/index.php?action=accueil');
+        }
+        break;
+
+    case 'admcom':
+        if(isset($_COOKIE['login'])) {
+        session_start();
+        $_SESSION['login'] = $_COOKIE['login'];
+        admcom();
+            }
+        else {
+            header('Location: ../jeanforteroche/index.php?action=accueil');
+        }
+        break;
+
+
+    case 'admail':
+        if(isset($_COOKIE['login'])) {
+        session_start();
+        $_SESSION['login'] = $_COOKIE['login'];
+        admail();
+            }
+        else {
+            header('Location: ../jeanforteroche/index.php?action=accueil');
+        }
+        break;
+
+
+        // ADMIN POST
+
+
+    case 'newChapter': // Page d'ajout de chapitre.
+    if(isset($_COOKIE['login'])) {
+        session_start();
+        $_SESSION['login'] = $_COOKIE['login'];
+
+        newChapter();
+            }
+        else {
+            header('Location: ../jeanforteroche/index.php?action=accueil');
+        }
+        break;
+
+    case 'addChapter': // Action ajoutant un chapitre.
+        if ($_POST['title'] != NULL && $_POST['content'] != NULL /*&& $_POST['picture'] != NULL*/) {
+        newPost($_POST['title'], $_POST['content']/*, $_POST['picture']*/);
+        }
+        else {
+            throw new Exception("Les champs doivent tous être remplis.");
+            
+        }
+        break; 
+
+
     case 'deletePost':
         if (isset($_GET['id']) && $_GET['id'] > 0){
 
@@ -84,6 +155,43 @@ switch ($_GET['action']) {
         }
         break;
 
+    // Page EDIT
+    case 'editPost':
+    if(isset($_COOKIE['login'])) {
+    session_start();
+    $_SESSION['login'] = $_COOKIE['login'];
+     if (isset($_GET['id']) && $_GET['id'] > 0) {
+        editPost($_GET['id']);
+        }
+        else
+                {
+                    throw new Exception('Aucun Chapitre ne porte cet identifiant !');
+                }
+
+            }
+        else {
+            header('Location: ../jeanforteroche/index.php?action=accueil');
+        }
+        break;
+    //fonction Edit
+    case 'updatePost':
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
+                updatePost($_GET['id']);
+            } else {
+                throw new Exception('Il faut remplir tous les champs.');
+            }
+        }
+        else
+                {
+                    throw new Exception('Aucun Chapitre ne porte cet identifiant !');
+                }
+        break;
+
+
+
+
+        // ADMIN COMMENTS
     case 'deleteComment':
         if (isset($_GET['id']) && $_GET['id'] > 0){
 
@@ -104,34 +212,8 @@ switch ($_GET['action']) {
         }
         break;
 
-    case 'admail':
-        session_start();
-        admail();
-        break;
+        // ADMIN MAILS
 
-    case 'newChapter':
-        session_start();
-        newChapter();
-        break;
-        
-    case 'supprmail':
-        supprmail();
-        break;
-
-    case 'addChapter':
-        if ($_POST['title'] != NULL && $_POST['content'] != NULL /*&& $_POST['picture'] != NULL*/) {
-        newPost($_POST['title'], $_POST['content']/*, $_POST['picture']*/);
-        }
-        else {
-            throw new Exception("Les champs doivent tous être remplis.");
-            
-        }
-        break; 
-
-
-    case 'addMail':
-        addMail();      
-        break; 
 
     case 'deleteMail':
         if (isset($_GET['id']) && $_GET['id'] > 0){
@@ -153,43 +235,7 @@ switch ($_GET['action']) {
         }
         break;
 
-    // Page EDIT
-    case 'editPost':
-    session_start();
-     if (isset($_GET['id']) && $_GET['id'] > 0) {
-        editPost($_GET['id']);
-        }
-        else
-                {
-                    throw new Exception('Aucun Chapitre ne porte cet identifiant !');
-                }
-        break;
-    //fonction Edit
-    case 'updatePost':
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
-            if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
-                updatePost($_GET['id']);
-            } else {
-                throw new Exception('Il faut remplir tous les champs.');
-            }
-        }
-        else
-                {
-                    throw new Exception('Aucun Chapitre ne porte cet identifiant !');
-                }
-        break;
 
-        case 'logout':
-            logout();
-        break;
-
-
-        // ADMIN 
-
-        case 'admin':
-            session_start();
-            admin($_POST['login']);
-        break;
 }
 }
 else {
