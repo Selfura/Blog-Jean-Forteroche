@@ -35,27 +35,23 @@ class PostManager extends Manager {
 	}
 
 
-	public function createPost($title, $content) {
+	public function createPost($title, $content/*, $picture*/) {
 		$db = $this->dbConnect();
 		// on crée un nouveau post
 
-		$post = $db->prepare('INSERT INTO posts(title, content, date_creation) VALUES (?, ?, NOW())');
-		$createPost = $post->execute(array($title, $content));
+		$post = $db->prepare('INSERT INTO posts(title, content, date_creation/*, $picture*/) VALUES (?, ?, NOW())/*, ?*/');
+		$createPost = $post->execute(array($title, $content/*, $picture*/));
 
 		return $createPost;
 	}
 
 
-	public function updatePost() {
+	public function updatePost($id) {
 		$db = $this->dbConnect();
 		// on édite un chapitre
-		$post = $db->prepare('UPDATE posts SET title= :title, content=:content, date_creation= NOW(), picture= :picture WHERE id= :id');
-		$post->bindParam('title',$title, \PDO::PARAM_STR);
-		$post->bindParam('content',$content, \PDO::PARAM_STR);
-		$post->bindParam('picture',$picture, \PDO::PARAM_STR);
-		$post->bindParam('id', $id, \PDO::PARAM_INT);
+		$post = $db->prepare('UPDATE posts SET title= ?, content=?/*, picture=?*/ WHERE id= ?');
 
-		$updatePost = $post->execute();
+		$updatePost = $post->execute(array($_POST['title'], $_POST['content']/*, $_POST['picture']*/, $id));
 
 		return $updatePost;
 	}

@@ -114,29 +114,42 @@ function login()
 }
 
 function logout() {
+	session_start();
+	$_SESSION = array();
+	session_destroy();
 
-   session_destroy();
+	header('Location: ../jeanforteroche/index.php?action=accueil');
 }
 
-function admin()
+function admin($login)
 {	
-	session_start();
-	$postManager = new PostManager();
-	$posts = $postManager->getPosts();
-	require('views/backend/AdminView.php');
+
+	$adminManager = new AdminManager();
+	$logAdmin = $adminManager->getLogin($login);
+
+	if ($_POST['login'] == $logAdmin['login']  && $_POST['pw'] == $logAdmin['pw']) {
+		$_SESSION['login'] = $logAdmin['login'];
+		$_SESSION['pw'] = $logAdmin['pw'];
+		$postManager = new PostManager();
+		$posts = $postManager->getPosts();
+		require('views/backend/AdminView.php');
+	} else {
+		echo "Mot de passe ou Identifiant erroné(s)";
+	}
 }
 // POSTS 
 
 // Page Nouveau Chapitre
 function newChapter()
-{
+{	
 	require('views/backend/newChapter.php');
 }
 //Ajout de chapitre
-function newPost($title, $content, $picture) {
+function newPost($title, $content/*, $picture*/) {
 
+	session_start();
 	$postManager = new PostManager();
-	$createPost = $postManager->createPost($title, $content, $picture);
+	$createPost = $postManager->createPost($title, $content/*, $picture*/);
 
 	header('Location: ../jeanforteroche/index.php?action=admin');
 }
@@ -169,6 +182,7 @@ function deletePost($id) {
 	}
 }
 function editPost($post_id) {
+
 	$postManager = new postManager();
 	$editPost = $postManager->getPost($post_id);
 
@@ -182,7 +196,7 @@ function editPost($post_id) {
 
 
 function admcom()
-{
+{	
 	$commentManager = new CommentManager();
 	$comments = $commentManager->getAllComments();
 	$reportComments = $commentManager->getReportComments();

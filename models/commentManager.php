@@ -37,7 +37,7 @@ class commentManager extends Manager {
 
 	public function getAllComments() {
 		$db = $this->dbConnect();
-		$comments = $db->query('SELECT id, title, author, DATE_FORMAT(comment_date, "Ajouté le %d/%m/%Y") AS date_comment, comment, avert, valid FROM comments WHERE valid=0 ORDER BY comment_date ');
+		$comments = $db->query('SELECT id, title, author, DATE_FORMAT(comment_date, "Ajouté le %d/%m/%Y") AS date_comment, comment, avert, valid FROM comments WHERE valid=0 AND avert=0 ORDER BY comment_date ');
 
 		return $comments;
 

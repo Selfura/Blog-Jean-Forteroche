@@ -8,14 +8,14 @@
         <div class="col-4">
             <div class="card">
                 <div class="card-body">
-                    <form action="" autocomplete="off">
+                    <form action="index.php?action=admin" method="POST" autocomplete="off">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username">
+                            <input type="text" class="form-control" name="login">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="password">
+                            <input type="password" class="form-control" name="pw">
                         </div>
-                        <a href="index.php?action=admin"><button type="button" id="sendlogin" class="btn btn-primary">Connexion</button></a>
+                        <button type="submit" name="connexion" id="sendlogin" class="btn btn-primary">Connexion</button>
                     </form>
                 </div>
             </div>

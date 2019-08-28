@@ -1,6 +1,9 @@
 <?php $title = "Éditer un Chapitre" ?>
 
-<?php ob_start(); ?>
+<?php 
+	ob_start();
+
+ ?>
 
 <?php require ("views/backend/navAdmin.php") ?>
 

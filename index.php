@@ -70,11 +70,8 @@ switch ($_GET['action']) {
         login();
         break;
 
-    case 'admin':
-        admin();
-        break;
-
     case 'admcom':
+        session_start();
         admcom();
         break;
     case 'deletePost':
@@ -108,10 +105,12 @@ switch ($_GET['action']) {
         break;
 
     case 'admail':
+        session_start();
         admail();
         break;
 
     case 'newChapter':
+        session_start();
         newChapter();
         break;
         
@@ -120,8 +119,8 @@ switch ($_GET['action']) {
         break;
 
     case 'addChapter':
-        if ($_POST['title'] != NULL && $_POST['content'] != NULL && $_POST['picture'] != NULL) {
-        newPost($_POST['title'], $_POST['content'], $_POST['picture']);
+        if ($_POST['title'] != NULL && $_POST['content'] != NULL /*&& $_POST['picture'] != NULL*/) {
+        newPost($_POST['title'], $_POST['content']/*, $_POST['picture']*/);
         }
         else {
             throw new Exception("Les champs doivent tous être remplis.");
@@ -156,6 +155,7 @@ switch ($_GET['action']) {
 
     // Page EDIT
     case 'editPost':
+    session_start();
      if (isset($_GET['id']) && $_GET['id'] > 0) {
         editPost($_GET['id']);
         }
@@ -179,6 +179,17 @@ switch ($_GET['action']) {
                 }
         break;
 
+        case 'logout':
+            logout();
+        break;
+
+
+        // ADMIN 
+
+        case 'admin':
+            session_start();
+            admin($_POST['login']);
+        break;
 }
 }
 else {

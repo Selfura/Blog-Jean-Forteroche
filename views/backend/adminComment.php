@@ -1,6 +1,8 @@
 <?php $title = "Administration" ?>
 
-<?php ob_start(); ?>
+<?php 
+	ob_start();
+ ?>
 
 <?php require ("views/backend/navAdmin.php") ?>
 

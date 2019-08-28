@@ -1,6 +1,8 @@
 <?php $title = "Création de Chapitre" ?>
 
-<?php ob_start(); ?>
+<?php 
+	ob_start();
+ ?>
 
 <?php require ("views/backend/navAdmin.php") ?>
 
@@ -9,14 +11,14 @@
 	<h2 class="text-center mt-0">Création d'un nouveau chapitre</h2>
 	<br>
 		<div class="container">
-			<form  method="post" action="index.php?action=addChapter">
+			<form  method="post" action="index.php?action=addChapter" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-sm-12">
 						<input class="form-control" type="text" placeholder="Titre du Chapitre" name="title">
 					</div>
 				</div>
 				<br>
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000" action="upload.php" enctype="multipart/form-data">
+					<input type="hidden" name="MAX_FILE_SIZE" value="100000">
 					Image : <input type="file" name="picture">
 
 				<br>

@@ -1,6 +1,8 @@
 <?php $title = "Administration" ?>
 
-<?php ob_start(); ?>
+<?php 
+	ob_start();
+ ?>
 
 <?php require ("views/backend/navAdmin.php") ?>
 
@@ -11,7 +13,7 @@
 <br>
 
 <section class=" text-center">
-			<h1 class="text-center mt-0">Liste des Chapitres</h2>
+			<h1 class="text-center mt-0">Liste des Chapitres</h1>
 			<br>
 
 <?php
