@@ -114,9 +114,12 @@ function login()
 }
 
 function logout() {
-
+	session_start();
 	$_SESSION = array();
 	session_destroy();
+
+	setcookie('login','');
+	setcookie('pw', '');
 
 	header('Location: ../jeanforteroche/index.php?action=accueil');
 }
@@ -151,6 +154,17 @@ function admin($login)
 		echo "Mot de passe ou Identifiant erroné(s)";
 	}
 }
+
+function admPosts() {
+
+	$postManager = new PostManager();
+	$posts = $postManager->getPosts();
+	require('views/backend/AdminView.php');
+}
+
+
+
+
 // POSTS 
 
 // Page Nouveau Chapitre

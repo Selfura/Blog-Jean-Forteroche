@@ -95,6 +95,18 @@ switch ($_GET['action']) {
         }
         break;
 
+    case 'admPosts':
+        if(isset($_COOKIE['login'])) {
+        session_start();
+        $_SESSION['login'] = $_COOKIE['login'];
+        admPosts();
+            }
+        else {
+            header('Location: ../jeanforteroche/index.php?action=accueil');
+        }
+        break;
+
+
     case 'admcom':
         if(isset($_COOKIE['login'])) {
         session_start();
