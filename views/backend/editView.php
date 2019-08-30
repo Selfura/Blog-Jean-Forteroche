@@ -12,15 +12,15 @@
 	<h2 class="text-center mt-0">Modication d'un chapitre</h2>
 	<br>
 		<div class="container">
-			<form  method="post" action="index.php?action=updatePost&amp;id=<?= $post['id']; ?>">
+			<form  method="post" action="index.php?action=updatePost&amp;id=<?= $post['id']; ?>"  enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-sm-12">
 						<input class="form-control" type="text" placeholder="Titre du Chapitre" name="title" value="<?= htmlspecialchars($post['title']); ?>">
 					</div>
 				</div>
 				<br>
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000" action="upload.php" enctype="multipart/form-data">
-					Image : <input type="file" name="picture_url">
+					<input type="hidden" name="MAX_FILE_SIZE" value="400000">
+					Image : <input type="file" name="picture">
 
 				<br>
 				<div class="row">

@@ -35,23 +35,23 @@ class PostManager extends Manager {
 	}
 
 
-	public function createPost($title, $content/*, $picture*/) {
+	public function createPost($title, $content, $picture) {
 		$db = $this->dbConnect();
 		// on crée un nouveau post
 
-		$post = $db->prepare('INSERT INTO posts(title, content, date_creation/*, $picture*/) VALUES (?, ?, NOW())/*, ?*/');
-		$createPost = $post->execute(array($title, $content/*, $picture*/));
+		$post = $db->prepare('INSERT INTO posts(title, content, date_creation, picture) VALUES (?, ?, NOW(), ?)');
+		$createPost = $post->execute(array($title, $content, $picture));
 
 		return $createPost;
 	}
 
 
-	public function updatePost($id) {
+	public function updatePost($id/*, $picture*/) {
 		$db = $this->dbConnect();
 		// on édite un chapitre
 		$post = $db->prepare('UPDATE posts SET title= ?, content=?/*, picture=?*/ WHERE id= ?');
 
-		$updatePost = $post->execute(array($_POST['title'], $_POST['content']/*, $_POST['picture']*/, $id));
+		$updatePost = $post->execute(array($_POST['title'], $_POST['content'],/* $picture,*/ $id));
 
 		return $updatePost;
 	}

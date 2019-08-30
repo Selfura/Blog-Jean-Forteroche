@@ -147,8 +147,10 @@ switch ($_GET['action']) {
         break;
 
     case 'addChapter': // Action ajoutant un chapitre.
-        if ($_POST['title'] != NULL && $_POST['content'] != NULL /*&& $_POST['picture'] != NULL*/) {
-        newPost($_POST['title'], $_POST['content']/*, $_POST['picture']*/);
+        if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
+            if(isset($_FILES['picture'])) {
+            newPost($_POST['title'], $_POST['content'], $_FILES['picture']);
+            }
         }
         else {
             throw new Exception("Les champs doivent tous être remplis.");
@@ -189,7 +191,9 @@ switch ($_GET['action']) {
     case 'updatePost':
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
-                updatePost($_GET['id']);
+                /*if(isset($_FILES['picture'])) {*/
+                    updatePost($_GET['id']/*, $_FILES['picture']*/);
+                /*} */
             } else {
                 throw new Exception('Il faut remplir tous les champs.');
             }

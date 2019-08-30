@@ -12,7 +12,7 @@
 					<div class="col-lg-12 text-center">
 						<h2 class="text-center mt-0"><?= htmlspecialchars($post['title']); ?></h2>
 						<hr class="divider my-4">
-						<img class="img-fluid img-responsive text-center imgpost" src="<?= $post['picture']; ?>" alt="">
+						<img class="img-fluid img-responsive text-center imgpost" src="public/images/<?= $post['picture']; ?>" alt="">
 						<p class="text-black-50 mb-6 text-justify">
 						<?= ($post['content']); ?>
 						</p>

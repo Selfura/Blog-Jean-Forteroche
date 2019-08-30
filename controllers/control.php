@@ -173,27 +173,71 @@ function newChapter()
 	require('views/backend/newChapter.php');
 }
 //Ajout de chapitre
-function newPost($title, $content/*, $picture*/) {
+function newPost($title, $content, $picture) {
 
 	session_start();
 	$postManager = new PostManager();
-	$createPost = $postManager->createPost($title, $content/*, $picture*/);
 
-	header('Location: ../jeanforteroche/index.php?action=admin');
+	$target = "public/images/";
+	$file = basename($_FILES['picture']['name']);
+	$sizemax = 4000000;
+	$size = filesize($_FILES['picture']['tmp_name']);
+	$extensions = array('.png', '.jpg', '.jpeg');
+	$extension = strrchr($_FILES['picture']['name'], '.');
+	// Verif de sécurité
+	if(!in_array($extension, $extensions)) 
+	{
+		$erreur = 'Vous devez utiliser des images de type .png, .jpeg, .jpg';
+	}
+	if($size>$sizemax)
+	{
+     $erreur = 'Le fichier est trop volumineux. Utilisez des fichiers de moins de 4mo.';
+	}
+	
+    if(move_uploaded_file($_FILES['picture']['tmp_name'], $target . $file)) {
+        	echo 'Upload effectué avec succès';
+        } else {
+        	echo "Echec de l'upload";
+        }
+    $createPost = $postManager->createPost($title, $content, $picture['name']);
+	header('Location: ../jeanforteroche/index.php?action=admPosts');
 }
 
 // Edit chapitre
 
-function updatePost($id) {
+function updatePost($id/*, $picture*/) {
 
 	$postManager = new PostManager();
-	$updatePost = $postManager->updatePost($id);
+/*
+	$target = "public/images/";
+	$file = basename($_FILES['picture']['name']);
+	$sizemax = 4000000;
+	$size = filesize($_FILES['picture']['tmp_name']);
+	$extensions = array('.png', '.jpg', '.jpeg');
+	$extension = strrchr($_FILES['picture']['name'], '.');
+	// Verif de sécurité
+	if(!in_array($extension, $extensions)) 
+	{
+		$erreur = 'Vous devez utiliser des images de type .png, .jpeg, .jpg';
+	}
+	if($size>$sizemax)
+	{
+     $erreur = 'Le fichier est trop volumineux. Utilisez des fichiers de moins de 4mo.';
+	}
+	
+    if(move_uploaded_file($_FILES['picture']['tmp_name'], $target . $file)) {
+        	echo 'Upload effectué avec succès';
+        } else {
+        	echo "Echec de l'upload";
+        }
+    */    
+	$updatePost = $postManager->updatePost(/*$picture['name'],*/ $id);
 
 	if($updatePost === false) {
 		throw new Exception('Impossible de mettre à jour le chapitre');
 	} else {
 
-	header('Location: ../jeanforteroche/index.php?action=admin');
+	header('Location: ../jeanforteroche/index.php?action=admPosts');
 	}
 }
 
@@ -206,7 +250,7 @@ function deletePost($id) {
 		throw new Exception('Impossible de supprimer le chapitre');
 	}
 	else {
-		header('Refresh: 0; url=../jeanforteroche/index.php?action=admin');
+		header('Refresh: 0; url=../jeanforteroche/index.php?action=admPosts');
 	}
 }
 function editPost($post_id) {
@@ -218,7 +262,6 @@ function editPost($post_id) {
 
 	require('views/backend/editView.php');
 }
-
 
 // COMMENTAIRES
 

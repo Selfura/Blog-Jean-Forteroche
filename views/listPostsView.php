@@ -30,7 +30,7 @@ while ($donnees = $posts->fetch())
 						<h2 class="text-center mt-0"><?= htmlspecialchars($donnees['title']); ?></h2>
 						<hr class="divider my-4">		
 						<a href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">
-						<img class="img-fluid img-responsive text-center imgchap" src="<?= $donnees['picture']; ?>" alt="">
+						<img class="img-fluid img-responsive text-center imgchap" src="public/images/<?= $donnees['picture']; ?>" alt="">
 						</a>
 						<p class="text-black-50 mb-4"><?= substr(($donnees['content']), 0, 200).'...'; ?></p>
 						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>

@@ -24,8 +24,12 @@ while ($donnees = $lastPost->fetch())
 					<div class="col-lg-10 text-center">
 						<h2 class="text-center mt-0">Dernier Chapitre : <?= htmlspecialchars($donnees['title']); ?></h2>
 						<hr class="divider my-4">
-						<img class="img-fluid img-responsive text-center imgindex" src="<?= $donnees['picture']; ?>" alt="">
-						<p class="text-black-50 mb-4"><?= substr(htmlspecialchars($donnees['content']), 0, 500).'...'; ?></p>
+						<a href="index.php?action=post&amp;id=<?= $donnees['id'] ?>"
+							><img class="img-fluid img-responsive text-center imgindex" src="public/images/<?= $donnees['picture']; ?>" alt="">
+						</a>
+						<a href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">
+							<p class="text-black-50 mb-4"><?= substr(htmlspecialchars($donnees['content']), 0, 500).'...'; ?></p>
+						</a>
 						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
 						<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Lire la suite</a>
 					</div>

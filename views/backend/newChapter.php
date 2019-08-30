@@ -18,7 +18,7 @@
 					</div>
 				</div>
 				<br>
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+					<input type="hidden" name="MAX_FILE_SIZE" value="400000">
 					Image : <input type="file" name="picture">
 
 				<br>
