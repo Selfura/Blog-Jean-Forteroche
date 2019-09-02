@@ -46,12 +46,12 @@ class PostManager extends Manager {
 	}
 
 
-	public function updatePost($id/*, $picture*/) {
+	public function updatePost($id, $picture) {
 		$db = $this->dbConnect();
 		// on édite un chapitre
-		$post = $db->prepare('UPDATE posts SET title= ?, content=?/*, picture=?*/ WHERE id= ?');
+		$post = $db->prepare('UPDATE posts SET title= ?, content=?, picture=? WHERE id= ?');
 
-		$updatePost = $post->execute(array($_POST['title'], $_POST['content'],/* $picture,*/ $id));
+		$updatePost = $post->execute(array($_POST['title'], $_POST['content'], $picture, $id));
 
 		return $updatePost;
 	}

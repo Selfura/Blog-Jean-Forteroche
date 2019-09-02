@@ -205,10 +205,10 @@ function newPost($title, $content, $picture) {
 
 // Edit chapitre
 
-function updatePost($id/*, $picture*/) {
+function updatePost($id, $picture) {
 
 	$postManager = new PostManager();
-/*
+
 	$target = "public/images/";
 	$file = basename($_FILES['picture']['name']);
 	$sizemax = 4000000;
@@ -230,8 +230,8 @@ function updatePost($id/*, $picture*/) {
         } else {
         	echo "Echec de l'upload";
         }
-    */    
-	$updatePost = $postManager->updatePost(/*$picture['name'],*/ $id);
+     
+	$updatePost = $postManager->updatePost($id, $picture['name']);
 
 	if($updatePost === false) {
 		throw new Exception('Impossible de mettre à jour le chapitre');
