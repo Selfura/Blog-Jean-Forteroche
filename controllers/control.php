@@ -45,7 +45,11 @@ function post($post_id)
     $comments = $commentManager->getComments($post_id);
     $signal = $commentManager->reportComment($post_id);
 
-    require('views/chapitre.php');
+    if($post) {
+    	require('views/chapitre.php');
+	} else {
+		throw new Exception("Le chapitre demandé n'existe pas.");		
+	}
 }
 /*
 			COMMENTAIRES 
@@ -118,8 +122,8 @@ function logout() {
 	$_SESSION = array();
 	session_destroy();
 
-	setcookie('login','');
-	setcookie('pw', '');
+	setcookie('login','', time()-10);
+	setcookie('pw', '', time()-10);
 
 	header('Location: ../jeanforteroche/index.php?action=accueil');
 }
@@ -143,15 +147,10 @@ function admin($login)
 		$postManager = new PostManager();
 		$posts = $postManager->getPosts();
 		require('views/backend/AdminView.php');
-	} elseif ($_COOKIE['login']) {
-		$postManager = new PostManager();
-		$posts = $postManager->getPosts();
-		require('views/backend/AdminView.php');
 	} 
-
-
 	else {
 		echo "Mot de passe ou Identifiant erroné(s)";
+		header('Refresh:3; url= ../jeanforteroche/index.php?action=accueil');
 	}
 }
 

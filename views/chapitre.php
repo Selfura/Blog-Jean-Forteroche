@@ -13,9 +13,9 @@
 						<h2 class="text-center mt-0"><?= htmlspecialchars($post['title']); ?></h2>
 						<hr class="divider my-4">
 						<img class="img-fluid img-responsive text-center imgpost" src="public/images/<?= $post['picture']; ?>" alt="">
-						<p class="text-black-50 mb-6 text-justify">
+						<div class="text-black-50 mb-6 text-justify">
 						<?= ($post['content']); ?>
-						</p>
+						</div>
 						<p class="text-black-50 mb-4"><?= $post['date_creation_fr']; ?></p>
 						<br>
 					</div>
@@ -45,19 +45,19 @@
 					<form  method="post" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>"> <!-- VIEW -->
 						<div class="row">
 							<div class="col-sm-12">
-								<input class="form-control" type="text" placeholder="Nom ou Pseudo" id="author" name="author">
+								<input class="form-control" type="text" placeholder="Nom ou Pseudo" id="author" name="author" required>
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input class="form-control" type="text" placeholder="Titre" name="title" id="title">
+								<input class="form-control" type="text" placeholder="Titre" name="title" id="title" required>
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<textarea placeholder="Entrez votre message ici..." class="form-control" rows="9" name="comment" id="comment"></textarea>
+								<textarea placeholder="Entrez votre message ici..." class="form-control" rows="9" name="comment" id="comment" required></textarea>
 							</div>
 						</div>
 						<br>

@@ -20,22 +20,22 @@
 						<form method="post" action="index.php?action=addMail">
 							<div class="row">
 								<div class="col-sm-6">
-									<input class="form-control" type="text" placeholder="Nom" name="name">
+									<input class="form-control" type="text" placeholder="Nom" name="name" required>
 								</div>
 								<div id="email"  class="col-sm-6">
-								<input class="form-control" type="email" placeholder="Email" name="mail">
+								<input class="form-control" type="email" placeholder="Email" name="mail" required>
 								</div>
 							</div>
 							<br>
 							<div class="row">
 								<div class="col-sm-12">
-									<input class="form-control" type="text" placeholder="Titre" name="title">
+									<input class="form-control" type="text" placeholder="Titre" name="title" required>
 								</div>
 							</div>
 							<br>
 							<div class="row">
 								<div class="col-sm-12">
-									<textarea placeholder="Entrez votre message ici..." class="form-control" rows="9" name="message"></textarea>
+									<textarea placeholder="Entrez votre message ici..." class="form-control" rows="9" name="message" required></textarea>
 								</div>
 							</div>
 							<br>

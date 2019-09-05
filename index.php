@@ -1,10 +1,11 @@
 <?php
 
 require('controllers/control.php');
-
+try {
 if(isset($_GET['action'])) {
 
 switch ($_GET['action']) {
+
 
     case 'accueil' :
 		home();
@@ -24,7 +25,7 @@ switch ($_GET['action']) {
     	break;
 
     case 'post':
-     if ($_GET['id'] > 0) {
+     if ($_GET['id'] > 0 ) {
     	post($_GET['id']);
         }
         else
@@ -67,7 +68,13 @@ switch ($_GET['action']) {
 
 
     case 'login':
-        login();
+        if(isset($_COOKIE['login'])) {
+            session_start();
+            $_SESSION['login'] = $_COOKIE['login'];
+        admPosts();
+        } else {
+            login();
+        }
         break;
 
 
@@ -86,7 +93,7 @@ switch ($_GET['action']) {
         // ADMIN 
 
     case 'admin':
-        if(isset($_POST['login'])) {
+        if(!empty($_POST['login'])) {
             session_start();
             admin($_POST['login']);
         }
@@ -256,4 +263,10 @@ switch ($_GET['action']) {
 }
 else {
     home();
+}
+}
+catch(Exception $e) {
+
+    echo 'Erreur : ' . $e->getMessage();
+    header('Refresh:3; url= ../jeanforteroche/index.php?action=accueil');
 }

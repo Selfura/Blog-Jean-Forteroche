@@ -7,7 +7,7 @@
 			Menu
 			<i class="fa fa-bars"></i>
 			</button>
-			<div class="collapse show navbar-collapse" id="navbarResponsive">
+			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
 						<a class="nav-link js-scroll-trigger" href="index.php?action=accueil">Accueil</a>

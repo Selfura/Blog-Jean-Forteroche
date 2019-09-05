@@ -5,7 +5,6 @@
 
 <div class="container">
     <div class="row justify-content-center align-items-center" style="height:100vh">
-        <div class="col-4">
             <div class="card">
                 <div class="card-body">
                     <form action="index.php?action=admin" method="POST" autocomplete="off">
@@ -18,7 +17,6 @@
                         <button type="submit" name="connexion" id="sendlogin" class="btn btn-primary">Connexion</button>
                     </form>
                 </div>
-            </div>
         </div>
     </div>
 </div>

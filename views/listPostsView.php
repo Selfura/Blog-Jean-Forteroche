@@ -32,7 +32,7 @@ while ($donnees = $posts->fetch())
 						<a href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">
 						<img class="img-fluid img-responsive text-center imgchap" src="public/images/<?= $donnees['picture']; ?>" alt="">
 						</a>
-						<p class="text-black-50 mb-4"><?= substr(($donnees['content']), 0, 200).'...'; ?></p>
+						<div class="text-black-50 mb-4"><?= substr(($donnees['content']), 0, 200).'...'; ?></div>
 						<p class="text-black-50 mb-4"><?= $donnees['date_creation_fr']; ?></p>
 						<a class="btn btn-light btn-xl js-scroll-trigger" href="index.php?action=post&amp;id=<?= $donnees['id'] ?>">Lire la suite</a>
 						<br>
