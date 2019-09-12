@@ -61,12 +61,11 @@ function addComment($post_id, $author, $title, $comment) {
 
 	$newComment = $commentManager->addComment($post_id, $author, $title, $comment);
 	if($newComment === true){
-		echo "Le commentaire a été posté.";
-		header('Refresh:2; url=../jeanforteroche/index.php?action=post&id='.$_GET['id']);
+		header('Location: ../jeanforteroche/index.php?action=post&id='.$_GET['id']);
 	}
 	else {
-		echo "Echec de l'envoi";
 		throw new Exception("Impossible d'ajouter le commentaire !");
+		header('Refresh:2; url= ../jeanforteroche/index.php?action=post&id='.$_GET['post_id']);
 	}
 }
 
@@ -77,11 +76,10 @@ function reportComment($id) {
 	$reportComment = $commentManager->reportComment($id);
 
 	if($reportComment === true) {
-		echo "Le commentaire a été signalé.";
-		header('Refresh:2; url=../jeanforteroche/index.php?action=post&id='.$_GET['post_id']);
+		header('Location: ../jeanforteroche/index.php?action=post&id='.$_GET['post_id']);
 	} else {
-		echo "Echec de l'envoi";
-		throw new Exceptio("Impossible de signaler le commentaire.");
+		throw new Exception("Impossible de signaler le commentaire.");
+		header('Refresh:2; url= ../jeanforteroche/index.php?action=post&id='.$_GET['post_id']);
 	}
 }
 
@@ -94,12 +92,10 @@ function addMail() {
 
 	if($mail !== true) {
 		$mailManager = new MailManager();
-		echo "Mail Envoyé";
-		header('Refresh: 2; url=../jeanforteroche/index.php?action=accueil');
+		header('Location: ../jeanforteroche/index.php?action=accueil');
 		}
 		else {
-		echo "Echec de l'envoi";
-		header('Refresh: 2; url=../jeanforteroche/index.php?action=accueil');
+		header('Location: ../jeanforteroche/index.php?action=accueil');
 		}
 
 }
@@ -113,7 +109,6 @@ function addMail() {
 
 function login()
 {
-
 	require("views/backend/Adminlogin.php");
 }
 
@@ -134,23 +129,32 @@ function admin($login)
 	$adminManager = new AdminManager();
 	$logAdmin = $adminManager->getLogin($login);
 
-	if ($_POST['login'] == $logAdmin['login']  && $_POST['pw'] == $logAdmin['pw']) {
-		$_SESSION['login'] = $logAdmin['login'];
-		$_SESSION['pw'] = $logAdmin['pw'];
+	if ($_POST['login'] == $logAdmin['login']) {
 
 		$login = $logAdmin['login'];
 		$pw = $logAdmin['pw'];
 
-		setcookie('login', $login, time() + 1800, null, null, false, true);
-		setcookie('pw', $pw, time() + 1800, null, null, false, true);
+		if(password_verify($_POST['pw'], $logAdmin['pw'])) {
 
-		$postManager = new PostManager();
-		$posts = $postManager->getPosts();
-		require('views/backend/AdminView.php');
+			$_SESSION['login'] = $logAdmin['login'];
+			$_SESSION['pw'] = $logAdmin['pw'];
+
+			setcookie('login', $login, time() + 1800, null, null, false, true);
+			setcookie('pw', $pw, time() + 1800, null, null, false, true);
+
+			$postManager = new PostManager();
+			$posts = $postManager->getPosts();
+			require('views/backend/AdminView.php');
+		} else {
+		echo "Mot de passe ou Identifiant erroné(s). 
+			</br>
+			<a href='../jeanforteroche/index.php?action=accueil'> Retour au site </a>";
+	}
 	} 
 	else {
-		echo "Mot de passe ou Identifiant erroné(s)";
-		header('Refresh:3; url= ../jeanforteroche/index.php?action=accueil');
+		echo "Mot de passe ou Identifiant erroné(s). 
+			</br>
+			<a href='../jeanforteroche/index.php?action=accueil'> Retour au site </a>";
 	}
 }
 

@@ -42,7 +42,7 @@
 							<div class="row">
 								<div class="col-sm-12 text-right">
 									<p>En cliquant sur Envoyer, vous acceptez le traitement de vos données pour garantir une bonne expérience sur notre site. Conformément aux lois relative à la protection des données personnelles. <p>
-									<input class="btn btn-action" type="submit" value="Envoyer">
+									<input class="btn btn-action" type="submit" value="Envoyer" onclick="return(confirm('En cliquant sur OK, votre mail sera envoyé à l\'administrateur.'));">
 								</div>
 							</div>
 						</form>

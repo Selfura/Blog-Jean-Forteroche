@@ -56,7 +56,7 @@ switch ($_GET['action']) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 reportComment($_GET['id']);
             } else {
-                throw new Exception("L'identifiant du commentaire à signaler n'a pas ététrouvé.");
+                throw new Exception("L'identifiant du commentaire à signaler n'a pas été trouvé.");
                 
             }
 
@@ -155,7 +155,7 @@ switch ($_GET['action']) {
 
     case 'addChapter': // Action ajoutant un chapitre.
         if ($_POST['title'] != NULL && $_POST['content'] != NULL) {
-            if(isset($_FILES['picture']) && ($_FILES['picture'] != NULL)) {
+            if(isset($_FILES['picture'])) {
             newPost($_POST['title'], $_POST['content'], $_FILES['picture']);
             }
         }
