@@ -9,7 +9,7 @@ class adminManager extends Manager {
 
 	public function getLogin($login) {
 		$db = $this->dbConnect();
-		$req = $db->prepare('SELECT * FROM jfadmin WHERE login= ?');
+		$req = $db->prepare('SELECT * FROM jfAdmin WHERE login= ?');
 
 		$req->execute(array($login));
 

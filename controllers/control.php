@@ -51,6 +51,7 @@ function post($post_id)
 		throw new Exception("Le chapitre demandé n'existe pas.");		
 	}
 }
+
 /*
 			COMMENTAIRES 
 */
@@ -197,11 +198,11 @@ function newPost($title, $content, $picture) {
      $erreur = 'Le fichier est trop volumineux. Utilisez des fichiers de moins de 4mo.';
 	}
 	
-    if(move_uploaded_file($_FILES['picture']['tmp_name'], $target . $file)) {
+    /*if(move_uploaded_file($_FILES['picture']['tmp_name'], $target . $file)) {
         	echo 'Upload effectué avec succès';
         } else {
         	echo "Echec de l'upload";
-        }
+        }*/
     $createPost = $postManager->createPost($title, $content, $picture['name']);
 	header('Location: ../jeanforteroche/index.php?action=admPosts');
 }

@@ -20,7 +20,7 @@
 				</div>
 				<br>
 					<input type="hidden" name="MAX_FILE_SIZE" value="400000">
-					Image : <input type="file" name="picture">
+					Image : <input type="file" name="picture" required>
 
 				<br>
 				<div class="row">

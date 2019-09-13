@@ -69,7 +69,7 @@ $lastPost->closeCursor();
 				</div>
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="mt-5">
-						<a class="nav-link" href="">
+						<a class="nav-link" href="index.php?action=post&id=1">
 							<i class="fas fa-4x fa-journal-whills mb-4"></i>
 							<h3 class="h4 mb-2">Premier Chapitre</h3>
 							<p class="text-muted mb-0">Tout a un commencement, et c'est le cas pour ce livre. Si vous arrivez ici pour la première fois, voici le premier chapitre.</p>
