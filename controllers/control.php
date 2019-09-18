@@ -119,7 +119,6 @@ function logout() {
 	session_destroy();
 
 	setcookie('login','', time()-10);
-	setcookie('pw', '', time()-10);
 
 	header('Location: ../jeanforteroche/index.php?action=accueil');
 }
@@ -133,16 +132,13 @@ function admin($login)
 	if ($_POST['login'] == $logAdmin['login']) {
 
 		$login = $logAdmin['login'];
-		$pw = $logAdmin['pw'];
 
 		if(password_verify($_POST['pw'], $logAdmin['pw'])) {
 
 			$_SESSION['login'] = $logAdmin['login'];
-			$_SESSION['pw'] = $logAdmin['pw'];
 
 			setcookie('login', $login, time() + 1800, null, null, false, true);
-			setcookie('pw', $pw, time() + 1800, null, null, false, true);
-
+			
 			$postManager = new PostManager();
 			$posts = $postManager->getPosts();
 			require('views/backend/AdminView.php');
@@ -198,11 +194,6 @@ function newPost($title, $content, $picture) {
      $erreur = 'Le fichier est trop volumineux. Utilisez des fichiers de moins de 4mo.';
 	}
 	
-    /*if(move_uploaded_file($_FILES['picture']['tmp_name'], $target . $file)) {
-        	echo 'Upload effectué avec succès';
-        } else {
-        	echo "Echec de l'upload";
-        }*/
     $createPost = $postManager->createPost($title, $content, $picture['name']);
 	header('Location: ../jeanforteroche/index.php?action=admPosts');
 }
@@ -228,12 +219,6 @@ function updatePost($id, $picture) {
 	{
      $erreur = 'Le fichier est trop volumineux. Utilisez des fichiers de moins de 4mo.';
 	}
-	
-    /*if(move_uploaded_file($_FILES['picture']['tmp_name'], $target . $file)) {
-        	echo 'Upload effectué avec succès';
-        } else {
-        	echo "Echec de l'upload";
-        }*/
      
 	$updatePost = $postManager->updatePost($id, $picture['name']);
 
